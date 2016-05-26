@@ -1,0 +1,21 @@
+{
+  "name": "Browser_Sample",
+  "main": "main.js",
+  "author": "Amir Houieh",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "cheerio": "^0.20.0",
+    "electron-prebuilt": "^0.37.8",
+    "electron-process": "^0.2.0",
+    "fs-extra": "^0.30.0",
+    "lodash": "^4.12.0",
+    "request": "^2.72.0",
+    "unfluff": "^1.0.0",
+    "url": "^0.11.0",
+    "url-pattern": "^1.0.1",
+    "walk-sync": "^0.2.6"
+  }
+}

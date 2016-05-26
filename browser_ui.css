@@ -1,0 +1,239 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+    line-height: 1.4em;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+/*-----------------NAVIGATION BAR------------------*/
+nav#navigation-bar{
+    position: fixed;
+    z-index: 9999999999999;
+
+    width: 100%;
+    height: 30px;
+
+    background: white;
+}
+
+nav#navigation-bar *{
+    -webkit-user-select: none;
+}
+
+nav#navigation-bar input#location {
+
+    width: 89%;
+    margin-top: 4px;
+    padding-left: 5px;
+
+    font-family: inherit;
+    font-size: 1em;
+
+    background-image: url('media/transparent.png');
+    background-color: transparent;
+    border: none;
+    outline: 0;
+
+}
+
+div#navigation-bar-bottomLine {
+    top: 26px;
+    width: 100%;
+    height: 100%;
+
+    background: aqua;
+    transition: opacity 1s;
+}
+
+div#navigation-bar-wrapper{
+
+    position: fixed;
+    display: block;
+    z-index: 99999;
+
+    width: 100%;
+    height: 4px;
+
+    background: white;
+
+    transition: height 0.3s;
+}
+
+div#navigation-bar-wrapper.extended{
+    height: 150px;
+}
+
+div#navigation-bar-wrapper>#menu-content{
+    display: none;
+    position: absolute;
+    top:0;
+    padding: 5px;
+}
+
+div#navigation-bar-wrapper.extended>#menu-content{
+    display: block;
+}
+
+div#navigation-bar-bottomLine.hidden {
+    opacity: 0.3;
+}
+
+nav#navigation-bar #logo {
+    display: initial;
+    float: left;
+
+    cursor: pointer;
+    height: 24px;
+    width: 24px;
+
+    transition: opacity 1s, height 1s;
+}
+nav#navigation-bar #logo img{
+    width: 100%;
+    height: auto;
+}
+
+nav#navigation-bar #logo:hover{
+    box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.25);
+}
+
+
+/*-----------------SCROLL BAR------------------*/
+::-webkit-scrollbar {
+    width:2px;
+    transition: opacity 1s;
+}
+
+::-webkit-scrollbar-track {
+    background:transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background:gray;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background:darkgray;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    opacity: 0;
+}
+
+
+
+
+/*-----------------WEBVIEW|DEFAULTS------------------*/
+
+div#webview {
+    position: fixed;
+    top: 30px;
+
+    width: 100%;
+    height: 100%;
+    padding: 1%;
+
+    overflow: auto;
+}
+
+#webview.disable{
+    opacity: 0.3;
+    pointer-events: none;
+    -webkit-user-select: none;
+
+}
+
+#webview.disable * {
+    pointer-events: none;
+    -webkit-user-select: none;
+}
+
+
+div#webview .link{
+    color: blue;
+    cursor: pointer;
+}
+
+.modules-wrapper{
+    width: 98% !important;
+    height: 100% !important;
+
+    overflow: auto;
+}
+
+.module-wrapper{
+    position: absolute;
+}
+
+section#v_home {
+    position: absolute;
+
+    margin: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-77%);
+
+    height: 400px;
+    width: 400px;
+
+    text-align: center;
+}
+
+section#v_home.off{
+    display: none;
+}
+
+section#v_home img {
+    width: 100%;
+}
+
+p#welcomenot>* {
+    display: block;
+}
+
+p#welcomenot {
+    margin-top: -100px;
+}
+
+
+/*-----------------WEBVIEW|EDIT MODE------------------*/
+
+.edit-handler {
+    width: 100%;
+    background: black;
+    color: white;
+    cursor: move;
+    top: 0;
+    position: absolute;
+    display: none;
+}
+
+.edit-handler.visiable{
+    display: block;
+}
+.module-wrapper[selector="editable"]{
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,1);
+    width: 96.5%;
+}
+
+.module-wrapper[selector="editable"] *:not(.edit-handler){
+    cursor: default !important;
+}
+
+.module-wrapper *[selector="highlighted"] {
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,1);
+}
+
+/*-----------------WEBVIEW|EDIT MODE | EDITOR MENU------------------*/
+
+.editor-menu {
+    width: 350px;
+    height: 100%;
+    position: fixed;
+    background: white;
+    right: 0;
+    top: 27px;
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,1);
+}

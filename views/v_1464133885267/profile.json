@@ -1,0 +1,10 @@
+{
+  "title": "Default view only images",
+  "description": "Default view for Re- for some pages",
+  "author": "Amir Houieh",
+  "urls": ["http://www.bbc.com/", "https://www.flickr.com"],
+  "script": "script",
+  "theme": "theme.css",
+  "content_modules":["cm_1464123763713"],
+  "id": "v_1464133885267"
+}

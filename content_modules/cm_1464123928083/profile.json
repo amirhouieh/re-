@@ -1,0 +1,9 @@
+{
+  "title": "Default Text Module",
+  "description": "A default module for Re- which extract the Main Article of the page",
+  "author": "Amir Houieh",
+  "urls": "",
+  "script": "extractor.js",
+  "css": "",
+  "id": "cm_1464123928083"
+}
