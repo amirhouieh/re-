@@ -72,8 +72,7 @@ function Formatter(){
     }
 
     self.do = function(_uri,content) {
-
-
+        
          if(!content.length || typeof content !== 'object')
              return 'problem to load content!';
 
@@ -95,7 +94,12 @@ function Formatter(){
          removeBadTags(content);
          removeAttr(content);
 
-         return doc(content).attr('name',uri.hostname);
+        let contentWrapper = doc('<div>');
+        contentWrapper.addClass('module-content-wrapper');
+
+        contentWrapper.append( doc(content).attr('name',uri.hostname) );
+
+         return contentWrapper;
     };
 
     function removeAttr(content) {

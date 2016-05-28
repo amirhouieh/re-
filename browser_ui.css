@@ -1,20 +1,27 @@
+
+
+@font-face {
+    font-family: Amir_Mono;
+    src: url("resources/amir.otf") format("opentype");
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: monospace;
+    /*font-family: Amir_Mono;*/
     line-height: 1.4em;
     font-size: 14px;
     overflow: hidden;
 }
 
+
 /*-----------------NAVIGATION BAR------------------*/
 nav#navigation-bar{
     position: fixed;
     z-index: 9999999999999;
-
     width: 100%;
     height: 30px;
-
     background: white;
 }
 
@@ -102,7 +109,7 @@ nav#navigation-bar #logo:hover{
 
 /*-----------------SCROLL BAR------------------*/
 ::-webkit-scrollbar {
-    width:2px;
+    width:10px;
     transition: opacity 1s;
 }
 
@@ -129,20 +136,16 @@ nav#navigation-bar #logo:hover{
 
 div#webview {
     position: fixed;
-    top: 30px;
-
+    top: 26px;
     width: 100%;
     height: 100%;
-    padding: 1%;
-
-    overflow: auto;
+    overflow: hidden;
 }
 
 #webview.disable{
     opacity: 0.3;
     pointer-events: none;
     -webkit-user-select: none;
-
 }
 
 #webview.disable * {
@@ -165,6 +168,7 @@ div#webview .link{
 
 .module-wrapper{
     position: absolute;
+    background: white;
 }
 
 section#v_home {
@@ -206,7 +210,7 @@ p#welcomenot {
     color: white;
     cursor: move;
     top: 0;
-    position: absolute;
+    position: absolute !important;
     display: none;
 }
 
@@ -216,6 +220,9 @@ p#welcomenot {
 .module-wrapper[selector="editable"]{
     box-shadow: 0px 0px 5px 1px rgba(0,0,0,1);
     width: 96.5%;
+    overflow: hidden;
+    -webkit-user-select: none;
+    z-index: 9;
 }
 
 .module-wrapper[selector="editable"] *:not(.edit-handler){
@@ -226,14 +233,55 @@ p#welcomenot {
     box-shadow: 0px 0px 5px 1px rgba(0,0,0,1);
 }
 
+.module-wrapper[selector="editable selected"]{
+    z-index: 999999999999;
+}
+.module-wrapper[selector="editable selected"] .resizer{
+    z-index: 9999999999999;
+}
+
+
+
 /*-----------------WEBVIEW|EDIT MODE | EDITOR MENU------------------*/
 
 .editor-menu {
-    width: 350px;
+    width: 30px;
     height: 100%;
     position: fixed;
     background: white;
     right: 0;
     top: 27px;
     box-shadow: 0px 0px 5px 1px rgba(0,0,0,1);
+
+    transition: width 0.5s;
+    padding: 4px;
 }
+
+.editor-menu.expended{
+    width: 350px;
+}
+
+section.view-wrapper {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    overflow: scroll;
+}
+
+.resizable {
+    position: absolute;
+    overflow: auto
+}
+.resizer {
+    width: 30px;
+    height: 30px;
+    background: black;
+    position:absolute;
+    right: 0;
+    bottom: 0;
+    cursor: se-resize;
+    z-index: 99;
+}
+
+.module-content-wrapper {max-height: 100%;overflow: auto;}

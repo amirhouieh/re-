@@ -3,16 +3,16 @@
  */
 
 var fs = require('fs');
-var fse = require('fs-extra');
-var path = require('path');
+var readJsonSync = require('fs-extra').readJsonSync;
+var join = require('path').join;
 const walkSync = require('walk-sync');
 
 const ContentModule = require('./browser_content_module');
 const Editor = require('./editor');
 
 const app_root = process.cwd();
-const views_dir = path.join(app_root, "views");
-const modules_dir = path.join(app_root, "content_modules");
+const views_dir = join(app_root, "views");
+const modules_dir = join(app_root, "content_modules");
 
 
 class ViewsController{
@@ -126,11 +126,11 @@ class View{
 
     constructor(_path){
         let id = _path.substring(0, _path.lastIndexOf("/"));
-        let viewAbsPath = path.join( views_dir, _path);
+        let viewAbsPath = join( views_dir, _path);
 
         this.id = id;
-        this.dir = path.join(views_dir,id);
-        this.profile = fse.readJsonSync(viewAbsPath, {throw: false});
+        this.dir = join(views_dir,id);
+        this.profile = readJsonSync(viewAbsPath, {throw: false});
         this.modules = [];
         this.isMain = typeof this.profile.urls == "string" && this.profile.urls.trim().length == 0;
         this.element = new ViewElement(this.profile);
@@ -185,7 +185,7 @@ class ViewElement{
 
         this.modulesWrapper.className = 'modules-wrapper';
         this.styleSheet.type = "text/css";
-        this.styleSheet.innerText = fs.readFileSync( path.join(views_dir,profile.id,profile.theme) );
+        this.styleSheet.innerText = fs.readFileSync( join(views_dir,profile.id,profile.theme) );
 
         this.wrapper.appendChild(this.styleSheet);
         this.wrapper.appendChild(this.modulesWrapper);

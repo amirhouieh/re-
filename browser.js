@@ -86,7 +86,7 @@ onload = function() {
     }
 
 
-    navigateHandler();
+    // navigateHandler();
 
 
 }
