@@ -35,4 +35,4 @@ content-driven web browser, web browser, open source project, electron app, node
 Contributions welcome! Please check us back on release date. 
 
 #Disclaimer
-The code in this repository (initialised by [amir houieh](https://github.com/amirhouieh).) will be released at 28, may 2016 to the public domain under the [UNLICENSE](./UNLICENSE)
+The code in this repository (initialised by [amir houieh](https://github.com/amirhouieh)) will be released at 28, Jun 2016 to the public domain under the [UNLICENSE](./UNLICENSE)
