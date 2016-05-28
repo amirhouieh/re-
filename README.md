@@ -16,6 +16,11 @@ A modular content-driven web browser.
 **open-source**: Re- is an open source project. you can clone the entire project repo on Github and of course any contribution will be welcome. 
 
 
+#Screen shots (initial)
+![Re- A modular content-driven web browser.](resources/media/screen_shot_google_resaults.png?raw=true "Google resaults | default view #1: text module")
+![Re- A modular content-driven web browser.](resources/media/screen_shot_wikipedia.jpg?raw=true "Wikipedia article | default view #1: text module"")
+
+
 #Keywords
 content-driven web browser, web browser, open source project, electron app, node js, modular web browser, customisable content, customisable browser
 
