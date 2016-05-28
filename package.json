@@ -1,8 +1,9 @@
 {
-  "name": "Browser_Sample",
+  "name": "Re",
   "main": "main.js",
   "author": "Amir Houieh",
   "version": "0.0.0",
+  "description": "A modular content-driven web browser"
   "scripts": {
     "start": "electron ."
   },
