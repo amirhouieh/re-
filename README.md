@@ -3,8 +3,7 @@ A modular content-driven web browser.
 
 #Manifest:
 
-**Re-** as a a new web browser alters the new way of surfing and consuming the web. “Re-” empowers the user to embrace the content of the web pages as well as the design and way how content is shown. Re- is a modular platform within which users can decide what type of content of a webpage they see. This becomes true by creating and adding content modules to the browser. Therefore “Re-” becomes a super minimal browser which is faster, more reliable and more efficient in terms of data-consumption by cutting off all the noises from a webpage’s content.
-
+**Re-** as a new web browser alters the new way of surfing and consuming the web. “Re-” empowers the user to embrace the content of the web pages as well as the design and way how content is shown. Re- is a modular platform within which users can decide what type of content of a webpage they see. This becomes true by creating and adding content modules to the browser. Therefore “Re-” becomes a super minimal browser which is faster, more reliable and more efficient in terms of data-consumption by cutting off all the noises from a webpage’s content.
 
 
 #Main Features 
