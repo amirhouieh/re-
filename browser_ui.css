@@ -38,7 +38,7 @@ nav#navigation-bar input#location {
     font-family: inherit;
     font-size: 1em;
 
-    background-image: url('media/transparent.png');
+    background-image: url('resources/media/transparent.png');
     background-color: transparent;
     border: none;
     outline: 0;

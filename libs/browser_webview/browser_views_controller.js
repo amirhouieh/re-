@@ -7,12 +7,12 @@ var readJsonSync = require('fs-extra').readJsonSync;
 var join = require('path').join;
 const walkSync = require('walk-sync');
 
-const ContentModule = require('./browser_content_module');
-const Editor = require('./editor');
+const ContentModule = require('./browser_module');
+const Editor = require('./browser_editor');
 
 const app_root = process.cwd();
-const views_dir = join(app_root, "views");
-const modules_dir = join(app_root, "content_modules");
+const views_dir = join(app_root, "_views");
+const modules_dir = join(app_root, "_modules");
 
 
 class ViewsController{
