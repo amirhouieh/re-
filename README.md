@@ -17,8 +17,12 @@ A modular content-driven web browser.
 
 
 #Screen shots (initial)
-![Re- A modular content-driven web browser.](resources/media/screen_shot_google_resaults.png?raw=true "Google resaults | default view #1: text module")
-![Re- A modular content-driven web browser.](resources/media/screen_shot_wikipedia.jpg?raw=true "Wikipedia article | default view #1: text module"")
+![Re- A modular content-driven web browser.](media/screen_shot_onlineopen.png?raw=true "Online open | default view #1: text module")
+[Online open](http://onlineopen.org/index.php) | default view #1: text module
+![Re- A modular content-driven web browser.](media/screen_shot_google_resaults.png? "Google resaults | default view #1: text module")
+[Google resaults](https://www.google.nl/search?safe=off&q=%22re-%22&oq=%22re-%22&gs_l=serp.3..0i7i30l10.1348.2137.0.2355.2.2.0.0.0.0.140.271.0j2.2.0....0...1.1.64.serp..0.2.270...0.7xqDxH838kc) | default view #1: text module
+![Re- A modular content-driven web browser.](media/screen_shot_wikipedia.png?raw=true "Wikipedia article | default view #1: text module")
+[Wikipedia article](https://en.wikipedia.org/wiki/Web_2.0) | default view #1: text module
 
 
 #Keywords
