@@ -29,7 +29,7 @@ A modular content-driven web browser.
 content-driven web browser, web browser, open source project, electron app, node js, modular web browser, customisable content, customisable browser
 
 #Release date
-28, may 2016
+28, Jun 2016
 
 #Contributing
 Contributions welcome! Please check us back on release date. 
