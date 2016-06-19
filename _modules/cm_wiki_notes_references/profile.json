@@ -1,0 +1,11 @@
+{
+  "title": "Default wiki references",
+  "description": "A default module for Re- which extract the references and notes for a wiki article",
+  "author": "Amir Houieh",
+  "urls": "",
+  "script": "extractor",
+  "css": "",
+  "color": "rgb(240, 220, 100)",
+  "icon": "icon.png",
+  "id": "cm_wiki_notes_references"
+}

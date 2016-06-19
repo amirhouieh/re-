@@ -5,5 +5,7 @@
   "urls": "",
   "script": "extractor.js",
   "css": "",
+  "color": "rgb(55, 24, 153)",
+  "icon": "icon.png",
   "id": "cm_1464123928083"
 }

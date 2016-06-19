@@ -1,0 +1,53 @@
+<div id="menu-page-design" class="menu-page">
+
+    <script type="text/javascript">
+
+        <!--toggle boxes-->
+        function toggleToolBox() {
+            let id = this.getAttribute('for');
+            this.parentNode.querySelector('.toolbox').classList.toggle('open');
+
+            var all=document.querySelectorAll('.toolbox:not(#'+ id +')');
+
+            for(let x=0; x<all.length;x++)
+                all[x].classList.remove('open');
+        }
+
+    </script>
+
+    <div class="modules-selector" id="selector"></div>
+
+    <div class="design-controller-wrapper selected-element">
+        <!--<label class="cssSelectorLabel">general selector</label>-->
+        <strong class="css-query-selector" name="tagname" id="tagname"></strong>
+        <div class="selector-wrapper">
+            <i><small class="css-query-selector" name="id" id="id"></small></i>
+            <i><small class="css-query-selector" name="classname" id="classname"></small></i>
+            <i><small class="css-query-selector" name="unique" id="unique"></small></i>
+        </div>
+    </div>
+
+    <div class="design-controller-wrapper" id="typography">
+        <strong class="design-controller-label" onclick="toggleToolBox.call(this)" for="typography_toolbox">
+            Typography
+        </strong>
+        <div class="toolbox" id="typography_toolbox"></div>
+    </div>
+
+    <div class="design-controller-wrapper" id="layout">
+        <strong class="design-controller-label" onclick="toggleToolBox.call(this)" for="layout_toolbox">
+            Layout
+        </strong>
+        <div class="toolbox" id="layout_toolbox"></div>
+    </div>
+
+    <div class="design-controller-wrapper" id="css">
+        <strong class="design-controller-label" onclick="toggleToolBox.call(this)" for="css_toolbox">
+            Costume css
+        </strong>
+        <div class="toolbox" id="css_toolbox">
+            <div class="css-blocks-wrapper"></div>
+        </div>
+    </div>
+
+</div>

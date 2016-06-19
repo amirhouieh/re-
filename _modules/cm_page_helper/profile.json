@@ -1,0 +1,11 @@
+{
+  "title": "Default page helper",
+  "description": "A default module for Re- which check for all content of page but the main article",
+  "author": "Amir Houieh",
+  "urls": "",
+  "script": "extractor",
+  "css": "",
+  "color": "rgb(240, 240, 190)",
+  "icon": "icon.png",
+  "id": "cm_page_helper"
+}

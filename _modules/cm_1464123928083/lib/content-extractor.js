@@ -19,62 +19,35 @@ module.exports = function(urlSet, html, lng) {
         var textualPageContent = extractTextualPage();
         var rawText = getNodeNetText.call(textualPageContent);
         var textRatio = textualPageContent.text().length/html.length;
-
+        
         //text-based page
         if( textualPageContent && (textRatio>=0.1 || rawText.length >=300 ) ) {
             console.log('it is textual page');
             return textualPageContent;
         }
-        else{
-            //might be image based content
-            var imageBasedContent = extractVisualPage();
+        
 
-            if( imageBasedContent ) {
-                console.log('visual page');
-                return imageBasedContent;
-            }
-            else {
-                console.log('try for metadata');
-                let metadata = self.metadata();
 
-                if(metadata)
-                    return metadata;
+        // else{
+        //     //might be image based content
+        //     var imageBasedContent = extractVisualPage();
+        //
+        //     if( imageBasedContent ) {
+        //         console.log('visual page');
+        //         return imageBasedContent;
+        //     }
+        //     else {
+        //         console.log('try for metadata');
+        //         let metadata = self.metadata();
+        //
+        //         if(metadata)
+        //             return metadata;
+        //
+        //         return 'has nothing';
+        //     }
+        // }
 
-                return 'has nothing';
-            }
-        }
     }
-
-    //only text module
-    self.searchInput = function () {
-        let form= doc('<form>');
-        let input = doc('<input>');
-
-        input.attr({
-            'name': urlSet.searchEngine.name + " search ...",
-            'class': 'formatted',
-            'type': 'text',
-            'value': urlSet.searchEngine.name + " search ...",
-        })
-
-        form.attr({
-            class: 'formatted',
-            href:  urlSet.searchEngine['search-query']
-
-    });
-
-        return form.append(input);
-    };
-
-    //only text module
-    self.searchResult = function () {
-        var content = extractISearchItems();
-
-        if(content.length)
-            return content;
-        else
-            return 'unable to find the content!'
-    };
 
     //default module (metadata)
     self.metadata = function() {
@@ -101,10 +74,18 @@ module.exports = function(urlSet, html, lng) {
     }
 
 
-
     function extractVisualPage() {
 
         var imageParents = [];
+
+
+        // let allTextNodes = doc('body *').contents().filter((i,node)=>node.type=="tag");
+        // let imagesNumber = doc('img').length;
+        // let textLength = getNodeNetText.call(allTextNodes).length;
+        // let numberofTextNodes = allTextNodes.length;
+        // console.log(allTextNodes);
+        // console.log('number of images: ',imagesNumber,numberofTextNodes,textLength  )
+        // console.log('image/text', imagesNumber/numberofTextNodes);
 
         doc('img').each(function(){
             var res = findImgWrapper(this);
@@ -127,57 +108,13 @@ module.exports = function(urlSet, html, lng) {
         return ex.html();
     };
 
-    function extractISearchItems() {
-        //doc(selector).map does not work?!
-        var items = [];
-        var selector = getSelector();
-
-        if(selector) {
-
-            doc(selector).each(function () {
-                let classname = "search-item";
-                if( doc(this).find('a').length >= 6 )
-                    classname += " topRes";
-                items.push(wrap(this, '<li>', classname));
-
-            })
-
-            if(items.length)
-                return wrap(items, '<ul>');
-            return [];
-        }
-
-        //default for other search pages such as wikipedia or ted.com
-        //assume they mostly wrapp search results in <li>
-
-        var res = doc('li').filter(function () {
-            return getNodeNetText.call(this).length >= 100 && isNavigationWrapper(this);
-        }).parent('ul');
-
-        return res;
-
-    }
-
-    //utils
-    function getSelector() {
-
-        if( urlSet.searchEngine && urlSet.searchEngine['item-selector'] )
-            return urlSet.searchEngine['item-selector'];
-
-        if( urlSet.itemSelector )
-            return urlSet.itemSelector;
-
-        else
-            return null;
-
-    };
     function findImgWrapper(node){
 
         var netText = getNodeNetText.call(node);
 
         if(netText.length>=10){
 
-            if( netText.length <= 500 && node.name !== "body"){
+            if( netText.length >= 20 && node.name !== "body"){
                 return wrap(node,'<li>');
             }
             else
@@ -189,15 +126,18 @@ module.exports = function(urlSet, html, lng) {
 
         return null;
     };
+
     function wrap(node, wrapperTag, classname) {
         var wrapper = doc(wrapperTag);
         classname = classname? classname+' formatted': 'formatted';
         wrapper.attr('class',classname);
         return wrapper.append(node);
     };
+
     function getNodeNetText() {
         return doc(this).text().replace(whiteSpaceRegex,'').trim();
     };
+
     function isNavigationWrapper(node) {
 
         if(!node) return;

@@ -1,0 +1,35 @@
+<div class="editor-menu">
+
+    <link rel="stylesheet" href="resources/fonts/fontawesome/style.css" type="text/css">
+    <link rel="stylesheet" href="html_components/editor/styles/menu.css" type="text/css">
+
+    <script type="text/javascript">
+
+        <!--toggle boxes-->
+        function toggleToolBox() {
+            let id = this.getAttribute('for');
+            this.parentNode.querySelector('.toolbox').classList.toggle('open');
+
+            var all=document.querySelectorAll('.toolbox:not(#'+ id +')');
+
+            for(let x=0; x<all.length;x++)
+                all[x].classList.remove('open');
+        }
+
+    </script>
+
+    <strong class="button icon-remove" id="menu-close-btn"></strong>
+
+    <div id="partition-selector-wrapper">
+        <strong class="button page-handler selected" id="partition-handler-about" page-selector="INFO" >info</strong>
+        <strong class="button page-handler" id="partition-handler-content" page-selector="CONTENT" >Content</strong>
+        <strong class="button page-handler" id="partition-handler-design" page-selector="DESIGN" >Design</strong>
+    </div>
+
+    <div class="action-controllers">
+        <strong class="button" id="reset">reset</strong>
+        <strong class="button" id="save">save</strong>
+    </div>
+    <div id="controllers-wrapper"></div>
+
+</div>

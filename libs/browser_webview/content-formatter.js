@@ -1,5 +1,6 @@
 module.exports = Formatter;
 
+const imageDataUrlRegex = /^data:image\/(png|jpg|jpeg|gif);base64,/;
 
 function Formatter(){
 
@@ -10,35 +11,50 @@ function Formatter(){
     var uri;
     var doc;
     const self = this;
+    const badAttrs = ['style', 'onclick', 'data'];
 
     const formatActionTable = {
 
+        "isLongText": function () {
+            if(doc(this).hasClass('formatted')){
+                return doc(this);
+            }
+
+            if(doc(this).text().length>100)
+                doc(this).addClass('longtext');
+
+            return doc(this);
+        },
+
         "badTags": function () {
+
 
             if(doc(this).hasClass('formatted')){
                 return doc(this);
             }
+
+            console.log('bad tags', this);
+
 
             return doc(this).remove();
         },
 
         "links": function () {
 
-
             if( isEmptyNode.call(this) || !this.attribs.href)
                 return doc(this).remove();
 
-
-            var href = urlTool.relToAbs(uri,this.attribs.href);
-            var hasImg =  doc(this).find('img');
-
-            if(hasImg.length){
-                return doc(this).replaceWith(hasImg);
-            }else if(!href){
-                return doc(this).html();
+            if(doc(this).hasClass('formatted')){
+                return doc(this);
             }
 
-            return doc(this).replaceWith( '<span title="'+href+'" class="link formatted" onclick="navigateHandler(this)" _href="'+ href +'">' + doc(this).html() + '</span>' );
+            var href = urlTool.relToAbs(uri,this.attribs.href);
+
+            // if(!href){
+            //     return doc(this).html();
+            // }
+
+            return doc(this).replaceWith('<a href="javascript:;" title="'+href+'" class="link formatted" onclick="navigateHandler(this);" _href="'+ href +'">' + doc(this).html() + '</a>');
         },
 
         "images": function () {
@@ -47,15 +63,17 @@ function Formatter(){
                 return doc(this);
 
 
+            if(this.attribs.src.match(imageDataUrlRegex))
+                return doc(this);
+
             var src = this.attribs.src;
 
             // //remove all attributes
             this.attribs= {};
-
             // //add new attributes
             this.attribs.src = urlTool.relToAbs(uri,src);
             this.attribs.class = "formatted";
-
+            this.attribs.onerror = "console.log(this);this.parentNode.removeChild();"
             return doc(this);
         },
 
@@ -65,21 +83,31 @@ function Formatter(){
                 return doc(this);
             }
 
-            this.attribs = {};
+            for(var x in badAttrs)
+                if(this.attribs[ badAttrs[x] ])
+                    doc(this).attr(badAttrs[x],null)
+
             return doc(this);
         }
 
     }
 
-    self.do = function(_uri,content) {
-        
-         if(!content.length || typeof content !== 'object')
-             return 'problem to load content!';
+    self.do = function(_uri,content, callback) {
+
+
+         if(!content || !content.length){
+             let contentWrapper = cheerio.load('<div class="module-content-wrapper">problem to load content!</div>');
+             return contentWrapper('.module-content-wrapper');
+         }
 
         uri = _uri;
-        doc = cheerio.load(content);
+        doc = cheerio.load('<div class="module-content-wrapper"></div>');
+        let wrapper = doc('.module-content-wrapper').append(doc(content));
 
-        if(content.hasClass('formatted')){
+        if(uri)
+            wrapper.attr('name',uri.hostname)
+
+        if(doc(content).hasClass('formatted')){
             var temp = content[0].attribs;
             content[0].attribs = {};
             for(var x in temp)
@@ -89,43 +117,40 @@ function Formatter(){
              content[0].attribs = {};
 
 
-         formatImages(content);
-         formatLinks(content);
-         removeBadTags(content);
-         removeAttr(content);
+         formatImages();
+         formatLinks();
+         removeBadTags();
+         removeBadAttr();
 
-        let contentWrapper = doc('<div>');
-        contentWrapper.addClass('module-content-wrapper');
-
-        contentWrapper.append( doc(content).attr('name',uri.hostname) );
-
-         return contentWrapper;
+         return wrapper;
     };
 
-    function removeAttr(content) {
-        doc(content).find('*:not(img,a)').each( function () {
+    function removeBadAttr() {
+        doc('*:not(img,a)').each( function () {
             return formatActionTable['removeAttr'].call(this);
         });
     };
 
-    function formatImages(content) {
+    function formatImages() {
 
-        doc(content).filter('img').each(function () {
+        doc('img').each(function () {
             return formatActionTable.images.call(this);
         })
 
     };
 
-    function formatLinks(content) {
-        doc(content).find('a').each(function(){
+    function formatLinks() {
+        doc('a').map(function(){
             return formatActionTable.links.call(this);
         });
     }
 
-    function removeBadTags(content) {
-        doc(content).find('*').each(function () {
+    function removeBadTags() {
+        doc('*').each(function () {
             if( isEmptyNode.call(this) || this.name == "script" || this.name == "link" )
                 return formatActionTable.badTags.call(this);
+
+            formatActionTable.isLongText.call(this);
         });
     };
 

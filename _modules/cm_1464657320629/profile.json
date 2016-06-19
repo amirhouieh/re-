@@ -1,0 +1,11 @@
+{
+  "title": "Default wooooo",
+  "description": "A default module for Re- which extract links from wiki",
+  "author": "Amir Houieh",
+  "urls": "",
+  "script": "extractor",
+  "css": "",
+  "color": "rgb(204, 107, 214)",
+  "icon": "icon.png",
+  "id": "cm_1464657320629"
+}

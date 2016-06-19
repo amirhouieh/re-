@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-    <link rel="stylesheet" href="browser_ui.css">
-    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="resources/fonts/source%20code%20pro/source-code-pro.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="resources/fonts/PTMonoWeb/stylesheet.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="browser_ui.css" type="text/css">
 
     <script src="browser.js"></script>
 
@@ -19,34 +20,32 @@
     <nav id="navigation-bar">
 
       <div id="controllers">
-        <div id="logo"><img src="resources/media/logo.gif"></div>
+        <span id="logo">
+          Re-
+        </span>
         <form id="location-form">
-          <input id="location" type="text" value="https://en.wikipedia.org/wiki/Web_2.0">
+          <input id="location" type="text" value="home" autocomplete="on">
         </form>
       </div>
 
       <div id="navigation-bar-wrapper">
         <div id="navigation-bar-bottomLine"></div>
+
         <section id="menu-content">
-          <button type="button" class="menu-button" id="edit-mode">go to edit mode</button>
+            <button type="button" class="menu-button" id="info">info</button>
+            <button type="button" class="menu-button" id="shortcuts">shortcuts</button>
+            <button type="button" class="menu-button" id="viewEditor">veiw editor</button>
+            <button type="button" class="menu-button" id="modulesEditor">modules editor</button>
+            <button type="button" class="menu-button" id="newViewer">create new view</button>
         </section>
+
       </div>
 
     </nav>
 
-
     <!--web view | canvas -->
-    <div id="webview">
+    <div id="webview"></div>
 
-      <section id="v_home" class="view-wrapper">
-        <!--<img src="media/logo.gif">-->
-        <p id="welcomenot">
-          <strong>Wellcome to Re-</strong>
-          <span>your first modular content-driven web browser</span>
-        </p>
-      </section>
-
-    </div>
   </body>
 
 </html>

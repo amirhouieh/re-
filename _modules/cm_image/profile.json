@@ -1,0 +1,11 @@
+{
+  "title": "Default Image Module",
+  "description": "A default module for Re- which extract the images of the page",
+  "author": "Amir Houieh",
+  "urls": "",
+  "script": "extractor",
+  "css": "",
+  "color": "rgb(200, 160, 100)",
+  "icon": "icon.png",
+  "id": "cm_image"
+}

@@ -1,0 +1,65 @@
+{
+  "typography": {
+
+    "g_1": [
+      {"name": "font-family", "type": "select", "label": "&#xf031;", "options":null}
+    ],
+    "g_2":[
+      {"name": "font-size", "type": "number", "label": "Tt", "min":"0"},
+      {"name": "line-height", "type": "number", "label": "&#xf034;"},
+      {"name": "letter-spacing", "type": "number", "label": "LS"},
+      {"name": "word-spacing", "type": "number", "label": "WS"}
+    ],
+    "g_3":[
+      {"name": "text-align", "type": "toggle", "value": "left", "label": "&#xf036;"},
+      {"name": "text-align", "type": "toggle", "value": "right", "label": "&#xf038;"},
+      {"name": "text-align", "type": "toggle", "value": "center", "label": "&#xf037;"},
+      {"name": "text-align", "type": "toggle", "value": "justify", "label": "&#xf039;"}
+    ],
+    "g_4":[
+      {"name": "font-weight", "type": "toggle", "value": "bold", "label": "&#xf032;"},
+      {"name": "text-decoration", "type": "toggle", "value": "underline", "label": "&#xf0cd;"},
+      {"name": "text-decoration", "type": "toggle", "value": "line-through", "label": "&#xf0cc;"},
+      {"name": "text-decoration", "type": "toggle", "value": "overline", "label": "<small style='text-decoration: overline'>O</small>"},
+      {"name": "font-style", "type": "toggle", "value": "oblique", "label": "<small style='text-decoration: oblique'>O</small>"},
+      {"name": "font-style", "type": "toggle", "value": "italic", "label": "&#xf033;]"}
+    ],
+    "g_5":[
+      {"name": "text-transform", "type": "toggle", "value": "uppercase", "label": "TT"},
+      {"name": "text-transform", "type": "toggle", "value": "lowercase", "label": "tt"},
+      {"name": "text-transform", "type": "toggle", "value": "capitalize", "label": "Tt"}
+    ]
+  },
+  "layout":{
+
+    "g_1":[
+      {"name": "draggable", "type": "toggle", "value": false, "label": "&#xf047;<small>draggable</small>"},
+      {"name": "resizable", "type": "toggle", "value": false, "label": "&#xf065;<small>resizable</small>"}
+    ],
+
+    "g_2":[
+      {"name": "left", "type": "number", "label": "x"},
+      {"name": "top", "type": "number", "label": "y"}
+    ],
+
+    "g_3":[
+      {"name": "width", "type": "number", "label": "&#xf07e;"},
+      {"name": "height", "type": "number", "label": "&#xf07d;"}
+    ],
+
+    "g_4":[
+      {"name": "margin-left", "type": "number", "label": "ML"},
+      {"name": "margin-right", "type": "number", "label": "MR"},
+      {"name": "margin-top", "type": "number", "label": "MT"},
+      {"name": "margin-bottom", "type": "number", "label": "MB"}
+    ],
+
+    "g_5":[
+      {"name": "padding-left", "type": "number", "label": "PL"},
+      {"name": "padding-right", "type": "number", "label": "PR"},
+      {"name": "padding-top", "type": "number", "label": "PT"},
+      {"name": "padding-bottom", "type": "number", "label": "PB"}
+    ]
+
+  }
+}

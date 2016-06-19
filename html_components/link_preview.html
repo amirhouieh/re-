@@ -1,0 +1,79 @@
+<div class="link-preview">
+
+    <style type="text/css">
+
+
+        .hide{
+            display: none !important;
+        }
+
+        .link-preview {
+            position: fixed;
+            width: 40%;
+            min-width: 300px;
+            height: auto;
+            background: #eeeeee;
+            box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.75);
+            top: 100px;
+            padding: 10px;
+            z-index: 9999999999;
+        }
+
+        .link-preview * {
+            font-family: sans-serif;
+            font-size: 8pt;
+            line-height: 1em;
+        }
+
+        .link-preview img {
+            width: 100%;
+        }
+
+        .fa-spin {
+            -webkit-animation: fa-spin 2s infinite linear;
+            animation: fa-spin 2s infinite linear;
+
+            display: -webkit-box;
+            margin-left: auto;
+            margin-right: auto;
+            width: 20px;
+            height: 20px;
+        }
+
+        .error{
+            color: red;
+        }
+
+        @-webkit-keyframes fa-spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(359deg);
+                transform: rotate(359deg);
+            }
+        }
+        @keyframes fa-spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(359deg);
+                transform: rotate(359deg);
+            }
+        }
+
+    </style>
+
+    <span class="sniff-text"></span>
+    <span id="loading-bar" class="fa-spin">
+        <img src="resources/media/spinner.png">
+    </span>
+
+    <span class="error hide">
+        Sorry! Re- did not get any respond from this url;
+    </span>
+
+</div>

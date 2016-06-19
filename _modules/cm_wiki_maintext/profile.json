@@ -1,0 +1,11 @@
+{
+  "title": "Default wiki main article",
+  "description": "A default module for Re- which extract the main article of the page",
+  "author": "Amir Houieh",
+  "urls": "",
+  "script": "extractor",
+  "css": "",
+  "color": "rgb(200, 160, 200)",
+  "icon": "icon.png",
+  "id": "cm_wiki_maintext"
+}

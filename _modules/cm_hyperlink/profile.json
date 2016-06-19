@@ -1,0 +1,11 @@
+{
+  "title": "Default hyperlink",
+  "description": "A default module for Re- which extract hyperlinks of a web-page",
+  "author": "Amir Houieh",
+  "urls": "",
+  "script": "extractor",
+  "css": "",
+  "color": "rgb(240, 240, 150)",
+  "icon": "icon.png",
+  "id": "cm_hyperlink"
+}

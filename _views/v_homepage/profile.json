@@ -1,0 +1,11 @@
+{
+  "title": "Homepage",
+  "description": "default home page for Re-",
+  "author": "Amir Houieh",
+  "urls": ["home"],
+  "script": "script.js",
+  "active": true,
+  "theme": "theme.css",
+  "content_modules":["cm_re_homepage"],
+  "id": "v_homepage"
+}

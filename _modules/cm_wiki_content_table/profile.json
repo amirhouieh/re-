@@ -1,0 +1,11 @@
+{
+  "title": "Default wiki content table",
+  "description": "A default module for Re- which extract the content table for a wiki article",
+  "author": "Amir Houieh",
+  "urls": "",
+  "script": "extractor",
+  "css": "",
+  "color": "rgb(200, 260, 200)",
+  "icon": "icon.png",
+  "id": "cm_wiki_content_table"
+}

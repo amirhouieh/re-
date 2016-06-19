@@ -2,10 +2,13 @@ const NavigationController = require('./libs/browser_ui/browser-navigation-contr
 const ViewsController = require('./libs/browser_webview/browser_views_controller');
 
 const views = new ViewsController();
+var navigateHandler;
 
-views.load(function () {
-    console.log( views.all )
-});
+const {ipcRenderer} = require('electron');
+views.load();
+
+ipcRenderer.send('url-to-chrome', 'test');
+
 
 onload = function() {
 
@@ -14,18 +17,23 @@ onload = function() {
     }
 
     const nav = new NavigationController(_$);
-
+    
     var hasScrollStart = false;
     var hasScrollStop;
     var webView = _$('#webview');
     var homeWrapper = _$('#v_home');
     var logo = _$('#logo');
-    var linkToEditMode = _$('#edit-mode');
+    var linkToEditMode = _$('#viewEditor');
 
-    nav.init(2)
     views.init(webView);
+    nav.init(views.colorList);
 
-    navigateHandler = function(link) {
+    function goToEditMode(e) {
+        nav.setEditMode();
+        views.setEditMode();
+    }
+
+    navigateHandler = (link)=>{
 
         let url = null;
 
@@ -35,17 +43,24 @@ onload = function() {
             url = link.getAttribute('_href');
         }
 
+        url = url||nav.locationInput.value;
+
+        // setTimeout(()=>{
+        //     ipcRenderer.send('url-to-chrome', url||nav.locationInput.value);
+        // },500)
+
         nav.go(url,{
             success: (uri,_html)=>{
 
-                if(homeWrapper.className.indexOf('off')===-1) {
-                    homeWrapper.classList.add('off');
+                if(!uri){
+                    views.setHomePage();
+                    nav.resetBarColor();
+                    return;
                 }
-
-                document.body.style.background = 'transparent';
-
+                
                 views.update(uri,_html);
-
+                nav.updateBarColor(views.currentViewId);
+                
             },
             error: (err)=>{
                 console.log(err);
@@ -54,41 +69,13 @@ onload = function() {
 
     }
 
-
     nav.form.onsubmit = function(e) {
         e.preventDefault();
         navigateHandler();
     };
 
-
-    webView.onscroll = function (e) {
-
-        if(hasScrollStart){
-            hasScrollStart = showScrollBar();
-        }
-
-        clearTimeout(hasScrollStop);
-        hasScrollStop = setTimeout(function(){
-            hasScrollStart = hideScrollBar();
-        },1000);
-
-    }
-
-    logo.onclick = function (e) {
-        nav.toggleMenu();
-    }
-
-    linkToEditMode.onclick = function (e) {
-        console.log('hi')
-        nav.updateLocation( "editor:" + nav.locationInput.value);
-        nav.toggleMenu();
-        views.setEditMode();
-    }
-
-
-    // navigateHandler();
-
-
+    linkToEditMode.onclick = (e)=> goToEditMode(e);
+    navigateHandler();
 }
 
 
