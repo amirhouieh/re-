@@ -8,11 +8,8 @@ class ModuleEditor{
 
     constructor(module){
         this.profile = module.profile;
-        this.titleBar = document.createElement('div');
-        this.titleBar.innerHTML = this.profile.title;
         this.wrapper = module.element;
         this.contentWrapper = module.element.querySelectorAll('.module-content-wrapper')[0]
-        this.wrapper.appendChild(this.titleBar);
         this.color = module.profile.color;
     }
 
@@ -38,10 +35,6 @@ class ModuleEditor{
             node.onmouseenter = (e)=> self.highlightNode(node);
             node.onmouseleave = (e)=> self.unHighlightNode(node);
         });
-
-        // $.draggable( this.wrapper );
-        // $.resizable(this.wrapper);
-
     }
 
     init(){

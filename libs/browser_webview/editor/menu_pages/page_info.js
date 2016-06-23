@@ -15,16 +15,9 @@ class EditorMenuContent extends PageSuperClass{
         this.html.element.appendChild(currentView.getInfoElem().element);
     }
 
-    update(){
-        return false;
-    }
-
-    addModulesIcons(){
-        let activeGallery = this.html.find('#active');
-        let restGallery = this.html.find('#rest');
-
-        _.each(this.icons.true,(icon)=> activeGallery.appendChild(icon.element));
-        _.each(this.icons.false,(icon)=> restGallery.appendChild(icon.element));
+    update(view){
+        this.html.element.innerHTML = "";
+        this.html.element.appendChild( view.getInfoElem().element );
     }
 }
 

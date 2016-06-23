@@ -1,5 +1,5 @@
 const request = require('request');
-const _ = require('../utils');
+const _ = require('lodash');
 
 class Navigation{
 
@@ -11,31 +11,115 @@ class Navigation{
         this.bar = $('#navigation-bar-bottomLine');
         this.barWrapper = $('#navigation-bar-wrapper');
         this.webView = $('#webview');
+        this.suggestionList = $('#suggestionList');
         this.theme = {colors: [], gradientQuery:null};
         this.colorList = null;
         this.currentViewId = null;
+        this.matchItems = [];
+        this.currentMatchItemIndex = 0;
+        this.isMenuOpen = false;
     }
 
     init(colors){
         this.colorList = colors;
         this.resetBarColor();
         this.attachEvents();
+        this.gradientQueryForSuggestionList = this.buildGradientQuery(this.getAllColors())
     }
 
 
     attachEvents(){
-        let self = this;
+        this.logo.onclick = (e)=> this.toggleMenu(e);
+        this.locationInput.onkeyup = (e)=> this.autoComplete(e);
 
-        this.logo.onclick = (e)=> self.toggleMenu(e);
     }
+
+    autoComplete(e){
+
+        let text = this.locationInput.value.toLowerCase().trim();
+
+        if(!text.length) {
+            this.resetSuggestionList()
+            return;
+        }
+
+
+        if(e.keyCode==40||e.keyCode==38){
+            this.setSuggestion(e,text);
+            return;
+        }
+
+        this.resetSuggestionList()
+
+        this.matchItems = history.getList().filter((item)=>
+            item.url.indexOf(text) >-1 || item.title.indexOf(text) >-1
+        ).map((item)=>{
+            let li = document.createElement('li');
+            li.setAttribute('url',item.url)
+            li.innerHTML = item.url + ' | <small><i>'+item.title.slice(0,40) + '... <small class="count">(visits:'+ item.count  + ')</small></i>';
+            this.suggestionList.appendChild(li);
+            return li;
+        });
+
+        this.suggestionList.style.height = this.matchItems.length * 20 + "px";
+    }
+
+
+    resetSuggestionList(){
+        this.suggestionList.innerHTML = "";
+        this.currentMatchItemIndex = -1;
+    }
+
+    selectSuggestion(text){
+        let item = this.matchItems[this.currentMatchItemIndex];
+
+        this.updateLocation( item.getAttribute('url') );
+        item.classList.add('selected');
+
+    }
+
+    setSuggestion(e){
+
+        if(!this.matchItems.length)
+            return;
+
+        _.each(this.matchItems,(item)=> item.classList.remove('selected'));
+
+
+        switch (e.keyCode){
+            //up
+            case 38:
+                this.currentMatchItemIndex-=1;
+                if(this.currentMatchItemIndex<0){
+                    this.currentMatchItemIndex = 0;
+                }
+                break;
+
+            //down
+            case 40:
+                this.currentMatchItemIndex+=1;
+                if(this.currentMatchItemIndex>=this.matchItems.length){
+                    this.currentMatchItemIndex = this.matchItems.length -1;
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        this.selectSuggestion();
+
+    }
+
+    
     
     go(_url, callbacks){
         let url = _url || this.locationInput.value;
         const self = this;
 
-
-        if(_url.trim() == "home"){
-            callbacks.success();
+        if(_url.trim() == ":home"){
+            this.resetBarColor();
+            callbacks.success({href: ":home"});
             return;
         }
 
@@ -65,7 +149,6 @@ class Navigation{
 
     setEditMode(){
         this.updateLocation( "editor:" + this.locationInput.value );
-        this.toggleMenu();
     }
 
     updateBarColor(viewId){
@@ -80,21 +163,27 @@ class Navigation{
 
 
     resetBarColor(){
+        this.setThemeColor( this.getAllColors() );
+    }
+
+    getAllColors(){
         let allViewsColors = [];
 
-        _.eachObj(this.colorList, (viewId,colors)=> {
-            _.eachArr(colors, (i,color)=> allViewsColors.push(color));
+        _.each(this.colorList, (colors,viewId)=> {
+            _.each(colors, (color,i)=> allViewsColors.push(color));
         });
 
-        this.setThemeColor( allViewsColors );
-
+        return allViewsColors
     }
 
     setThemeColor(colors){
         let gradientQuery = this.buildGradientQuery(colors);
 
+        this.gradientQuery = gradientQuery;
+
         this.bar.style.background = gradientQuery;
         this.logo.style.background = gradientQuery;
+        this.suggestionList.style.background = gradientQuery;
 
         this.logo.style.WebkitBackgroundClip = "text";
         this.logo.style.WebkitTextFillColor = "transparent";
@@ -102,36 +191,30 @@ class Navigation{
     }
 
     buildGradientQuery(colors){
-        return 'linear-gradient(to right,'+ colors.join(',') +')';
+        return 'linear-gradient(to right,'+ colors.join(',') +') 0% 0% / 200% 200%';
     }
 
     toggleMenu(){
         var self = this;
 
-        self.bar.classList.toggle('hidden');
         self.barWrapper.classList.toggle('extended');
         self.webView.classList.toggle('disable');
 
-        setTimeout(function () {
-            self.bar.classList.remove('hidden');
-        }, 300)
+        this.loadStarts();
+        setTimeout(()=>self.loadEnds(),1000);
+        this.isMenuOpen = !this.isMenuOpen;
 
     }
 
     loadStarts(){
         var self= this;
-
-        console.log('start loading');
-        this.timer = setInterval(function () {
-            self.bar.classList.toggle('hidden');
-        }, 500);
-
+        console.log('starts loading');
+        self.bar.classList.add('gradientAnimate');
     }
 
     loadEnds(){
         console.log('end loading');
-        this.bar.classList.remove('hidden')
-        clearInterval(this.timer);
+        this.bar.classList.remove('gradientAnimate');
     }
     
 }

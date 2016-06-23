@@ -64,8 +64,8 @@ class NumberType extends Input{
         this.min = inputData.min;
         this.max = inputData.max;
 
-        this.html.find('#goup').onclick = (e)=> this.goUp();
-        this.html.find('#godown').onclick = (e)=> this.goDown();
+        // this.html.find('#goup').onclick = (e)=> this.goUp();
+        // this.html.find('#godown').onclick = (e)=> this.goDown();
     }
 
     onChangeHandler(){

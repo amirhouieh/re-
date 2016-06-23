@@ -18,7 +18,7 @@ const SelectorTypes = {
     UNIQUE: 'unique'
 }
 
-const ToolBoxNames = ['typography','layout','css'];
+const ToolBoxNames = ['presets','typography','layout','css'];
 
 class EditorMenuDesign extends PageSuperClass{
 
@@ -32,12 +32,16 @@ class EditorMenuDesign extends PageSuperClass{
         this.moduleHandlers = [];
         this.toolboxes = {}
         this.inputs = [];
+        this.cssRules = [];
+        this.currentModuleSelector = null;
 
         this.cssEditor = new CssEditor();
 
         this.selectedElementStyle = null;
         this.selectedElementSelectorQueries = null;
         this.querySelector = null;
+
+        this.viewId = null;
 
         this.onChange = null;
 
@@ -46,7 +50,7 @@ class EditorMenuDesign extends PageSuperClass{
         );
 
         _.each(ToolBoxNames,(toolName)=>
-            this.toolboxes[toolName] = this.html.find('.design-controller-wrapper#'+ toolName +'>.toolbox')
+            this.toolboxes[toolName] = this.html.find('.toolbox#'+ toolName + '_toolbox')
         );
 
     }
@@ -56,19 +60,58 @@ class EditorMenuDesign extends PageSuperClass{
         this.attachEvents();
         this.initFonts();
         this.initForms();
+        this.initPresets();
+        this.viewId = view.id;
         this.cssEditor.init(this.toolboxes.css);
-        this.cssEditor.onChange = (cssProp)=> this.onChange(cssProp);
+        this.cssEditor.onChange = (cssProp)=> {this.onChange(cssProp);}
     }
-    
+
+    reset(){
+        this.cssRules = [];
+    }
+
+    getCssRules(){
+        let temp = _.groupBy(this.cssRules,'selector');
+        let inlineStyles = {};
+
+        _.each(temp,(rules,selector)=> {
+            inlineStyles[selector] = _.map(_.groupBy(rules, 'rule.name'), (rule)=>rule.pop().rule)
+        });
+
+        return Object.keys(inlineStyles).length?inlineStyles:null;
+    }
+
+    updateView(view){
+        this.initModuleHandlers(view);
+        this.selectedElementStyle = null;
+        this.selectedElementSelectorQueries = null;
+        this.querySelector = null;
+    }
+
     initModuleHandlers(view){
         let wrapper = this.html.find('.modules-selector');
+        wrapper.innerHTML = "";
+        this.moduleHandlers = [];
+        
         view.each((module)=>{
             let handler = moduleHandler(module);
             wrapper.appendChild(handler);
             this.moduleHandlers.push(handler);
         });
     }
+    
+    initPresets(){
+        let presetsWrapper = this.html.find('#presets_toolbox');
 
+        _.each(this.cssPropList.presets,(preElem)=>{
+            preElem.onclick = (e)=>{
+                console.log(preElem.dataset);
+            }
+
+            presetsWrapper.appendChild(preElem);
+        })
+
+    }
     initFonts(){
         this.cssPropList.setSystemFonts();
     }
@@ -90,7 +133,12 @@ class EditorMenuDesign extends PageSuperClass{
                 _.each(group,(inputData)=>{
                     let input = new cssInputController[ inputData.type ]( inputData );
                     input.init();
-                    input.onChangeCallback = (cssProp)=> self.onChange(cssProp);
+
+                    input.onChangeCallback = (cssProp)=> {
+                        self.updateCssRules(cssProp);
+                        self.onChange(cssProp);
+                    }
+
                     form.appendChild( input.html.element );
                     self.inputs.push(input);
                 })
@@ -100,6 +148,16 @@ class EditorMenuDesign extends PageSuperClass{
 
         });
 
+    }
+
+    updateCssRules(cssProp){
+        let query = this.currentModuleSelector==this.querySelector?
+                        this.currentModuleSelector :
+                        this.currentModuleSelector+' ' + this.querySelector;
+
+        query = '#' + this.viewId +" " + query;
+
+        this.cssRules.push({selector: query, rule: cssProp});
     }
     
     attachEvents() {
@@ -115,7 +173,14 @@ class EditorMenuDesign extends PageSuperClass{
 
         //one of id, tagname, classname, or unique
         //default SelectorTypes.TAGNAME
-        let selectorType = _selectorType || SelectorTypes.TAGNAME;
+        let selectorType = _selectorType;
+
+        if(selectorType){
+            //it is a module wrapper
+            this.currentModuleSelector = '#' + targetElement.id;
+        }else{
+            selectorType = SelectorTypes.TAGNAME;
+        }
 
         this.setSelectedElement(targetElement);
         this.updateSelectorHandlers(selectorType);
@@ -123,7 +188,6 @@ class EditorMenuDesign extends PageSuperClass{
     }
 
     setSelectedElement(targetElement){
-        this.selectedElement = targetElement;
         this.selectedElementStyle = getComputedStyle(targetElement);
         this.selectedElementSelectorQueries = createCssSelector(targetElement);
     }

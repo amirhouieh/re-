@@ -3,8 +3,9 @@
  */
 
 const join = require('path').join;
-const readFileSync = require('fs').readFileSync;
+const {readFileSync,writeFile} = require('fs');
 const readJsonSync = require('fs-extra').readJsonSync;
+const _ = require('lodash');
 
 const app_root = process.cwd();
 const views_dir = join(app_root, "_views");
@@ -23,7 +24,6 @@ class View{
         this.element = new ViewElement(this.profile);
         this.colorTheme = [];
         this.execute = require(join(views_dir,this.profile.id,this.profile.script));
-
     }
 
     loadModules(){
@@ -34,6 +34,19 @@ class View{
         this.modules = this.profile.content_modules.map(
             (moduleId)=> mc.loadOne(moduleId)
         );
+    }
+
+    updateTheme(costumeCss,callback){
+
+        let {jsonToCss} = require(join(app_root,'libs/doc-utils'));
+        let cssQuery = jsonToCss(costumeCss);
+        let themeFilePath = join(views_dir, this.profile.id, this.profile.theme);
+
+        let themeFile = readFileSync(themeFilePath, 'utf8');
+
+        themeFile += cssQuery;
+
+        writeFile(themeFilePath, themeFile, 'utf8',callback);
 
     }
 

@@ -1,0 +1,99 @@
+[
+    {
+        "name": "Headline large",
+        "icon": "h1",
+        "rules": [
+            {
+                "property": "font-size",
+                "value": "32px"
+            },
+            {
+                "property": "font-weight",
+                "value": "bold"
+            },
+            {
+                "property": "line-height",
+                "value": "38px"
+            }
+        ]
+    },
+
+    {
+        "name": "Headline large underline",
+        "icon": "<span style='text-decoration:underline;'>h1</span>",
+        "rules": [
+            {
+                "property": "font-size",
+                "value": "32px"
+            },
+            {
+                "property": "font-weight",
+                "value": "bold"
+            },
+            {
+                "property": "line-height",
+                "value": "38px"
+            },
+            {
+                "property": "text-decoration",
+                "value": "underline"
+            }
+        ]
+    },
+
+    {
+        "name": "Headline meduim",
+        "icon": "h2",
+        "rules": [
+            {
+                "property": "font-size",
+                "value": "24px"
+            },
+            {
+                "property": "font-weight",
+                "value": "bold"
+            },
+            {
+                "property": "line-height",
+                "value": "27px"
+            }
+        ]
+    },
+    {
+        "name": "Headline small",
+        "icon": "Strong",
+        "rules": [
+            {
+                "property": "font-size",
+                "value": "16px"
+            },
+            {
+                "property": "font-weight",
+                "value": "bold"
+            },
+            {
+                "property": "line-height",
+                "value": "18px"
+            }
+        ]
+    },
+    {
+        "name": "running text",
+        "icon": "text",
+        "rules": [
+            {
+                "property": "font-size",
+                "value": "12px"
+            },
+            {
+                "property": "font-weight",
+                "value": "normal"
+            },
+            {
+                "property": "line-height",
+                "value": "14px"
+            }
+        ]
+    }
+
+]

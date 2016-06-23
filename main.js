@@ -8,6 +8,7 @@ app.on('window-all-closed', function() {
   app.quit();
 });
 
+// http://www.tmz.com/2016/03/27/dave-chappelle-caitlyn-jenner-jokes-kylie-tyga/
 
 ipcMain.on('url-to-chrome', (event, arg) => {
     //this will send the message to chrome itself;
@@ -33,6 +34,7 @@ app.on('ready', function() {
         autoHideMenuBar: true,
         // frame: false
     });
+    
 
     // chromeWindow  = new BrowserWindow({
     //     width: width,
@@ -46,7 +48,7 @@ app.on('ready', function() {
 
     // chromeWindow.setIgnoreMouseEvents(true)
     // chromeWindow.openDevTools();
-    mainWindow.openDevTools();
+    // mainWindow.openDevTools();
 
 });
 

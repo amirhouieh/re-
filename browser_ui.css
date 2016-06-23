@@ -86,21 +86,21 @@ section#menu-content>* {
     display: inline-block;
 }
 
-button.menu-button {
+button{
     padding: 5px;
     background: transparent;
     box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
     color: white;
+    font-family: helvetica !important;
     /*width: calc(20% - 10px);*/
 }
 
-button.menu-button:hover{
+button:hover{
     background: rgba(0,0,0,0.2);
 }
 
 div#navigation-bar-wrapper * {
-    font-family: helvetica !important;
-    font-size: 1.1vw;
+    font-size: 0.8rem;
     letter-spacing: 0.1vw;
     font-weight: lighter;
 }
@@ -155,18 +155,7 @@ div#webview {
     top: 26px;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-}
-
-#webview.disable{
-    opacity: 0.3;
-    pointer-events: none;
-    -webkit-user-select: none;
-}
-
-#webview.disable * {
-    pointer-events: none;
-    -webkit-user-select: none;
+    overflow: auto;
 }
 
 section#v_home {
@@ -212,3 +201,37 @@ h1#result {
     line-height: 1em;
 }
 
+.gradientAnimate{
+    -webkit-animation: AnimationName 2s ease infinite;
+    animation: AnimationName 2s ease infinite;
+}
+
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+ul#suggestionList {
+    position: absolute;
+    top: 25px;
+    width: 100%;
+    height: 0;
+    z-index: 999999999999;
+    color: white;
+    background: transparent;
+
+    transition: height 500ms;
+    /* border: 1px solid; */
+}
+
+ul#suggestionList>li{
+    cursor: default;
+    padding-left: 29px;
+    font-size: 0.9em;
+    font-weight: lighter;
+}
+
+ul#suggestionList>li.selected{
+    color: black;
+}

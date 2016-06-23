@@ -40,7 +40,11 @@ class Template{
     }
 
     setAttr(){
-        
+
+    }
+
+    remove(){
+        this.element.parentNode.removeChild(this.element);
     }
     
     find(selector){

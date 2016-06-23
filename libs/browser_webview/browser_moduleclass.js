@@ -38,8 +38,10 @@ class ContentModuleObj{
         // elem.find('img').src = join(this.path, this.profile.icon);
         iconImage.style.backgroundImage = 'url(' +  join(this.path, this.profile.icon) + ')';
         iconImage.style.borderColor = this.profile.color;
-        iconImage.style.backgroundColor = this.profile.color;
-        elem.element.id = this.id;
+        // iconImage.style.backgroundColor = this.profile.color;
+        // iconImage.style.backgroundColor = this.profile.color;
+        elem.element.style.borderBottom = "1px solid " + this.profile.color;
+        elem.element.setAttribute('module-id',this.id);
 
         return elem;
     }

@@ -33,9 +33,6 @@ function Formatter(){
                 return doc(this);
             }
 
-            console.log('bad tags', this);
-
-
             return doc(this).remove();
         },
 

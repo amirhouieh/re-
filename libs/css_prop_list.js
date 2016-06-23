@@ -4,6 +4,7 @@ let _ = require('lodash');
 
 const defaults = require('../resources/css_prop_list_defaults.json');
 const all = require('../resources/css_prop_list.json');
+const presets = require('../_presets/defaults.json');
 var ins_fontlist = fs.readdirSync('resources/fonts');
 var web_fontlist = require('../resources/web_font_list_defaults.json');
 var sys_fontlist = fontManager.getAvailableFontsSync();
@@ -18,5 +19,20 @@ module.exports.setSystemFonts = function () {
 module.exports.list = {
   defaults: defaults,
   all: all,
-  fontList: fontlist
+  fontList: fontlist,
 }
+
+module.exports.presets = presets.map((preset)=>{
+  let presetIcon = document.createElement('span');
+
+  presetIcon.className = 'preset-wrapper label';
+  presetIcon.innerHTML = preset.icon;
+
+  _.each(preset.rules,(rule)=>{
+    presetIcon.style[rule.property] = rule.value;
+  })
+
+  presetIcon.setAttribute('data', JSON.stringify(preset));
+
+  return presetIcon;
+});

@@ -1,23 +1,23 @@
 
-*{
+#v_wikipedia_reader  *{
     font-family: "Georgia";
     font-weight: normal;
     margin: 0;
 }
 
-body{
+#v_wikipedia_reader {
     font-size: 10pt;
 }
 
-.hide{
+#v_wikipedia_reader .hide{
     display: none;
 }
 
-section#v_wikipedia_reader a{
+#v_wikipedia_reader a{
     color: rgba(0,0,0,0.5);
 }
 
-section#v_wikipedia_reader span.closeHandler {
+#v_wikipedia_reader span.closeHandler {
     position: absolute;
     top: 0;
     right: 0;
@@ -31,7 +31,7 @@ section#v_wikipedia_reader span.closeHandler {
 }
 
 /*TYPOGRAPHY*/
-div#cm_wiki_maintext{
+#v_wikipedia_reader #cm_wiki_maintext{
     width: 70%;
     max-width: 600px;
     font-size: 14px;
@@ -42,16 +42,16 @@ div#cm_wiki_maintext{
     position: relative;
 }
 
-div#cm_wiki_maintext p{
+#v_wikipedia_reader #cm_wiki_maintext p{
     text-indent: 36pt;
 }
 
-div#cm_wiki_maintext .chapter {
+#v_wikipedia_reader #cm_wiki_maintext .chapter {
     margin-bottom: 2em;
     display: block;
 }
 
-div#cm_wiki_maintext .mw-headline {
+#v_wikipedia_reader #cm_wiki_maintext .mw-headline {
     /* margin-bottom: 1em; */
     display: block;
 }
@@ -62,36 +62,36 @@ div#cm_wiki_maintext a{
     color: rgba(0,0,0,0.5);
 }
 
-div#cm_wiki_maintext p.longtext {
+#v_wikipedia_reader #cm_wiki_maintext p.longtext {
     margin-bottom: 1em;
 }
 
-div#cm_wiki_maintext h2 {
+#v_wikipedia_reader #cm_wiki_maintext h2 {
     font-size: 18pt;
     text-indent: 36pt;
     line-height: 1.15;
 }
 
-div#cm_wiki_maintext .chapter>p:nth-child(2), div#cm_wiki_maintext blockquote{
+#v_wikipedia_reader #cm_wiki_maintext .chapter>p:nth-child(2), div#cm_wiki_maintext blockquote{
     font-size: 20px;
     margin-left: 36pt;
     font-style: italic;
     line-height: 1.4em;
 }
 
-div#cm_wiki_maintext ul{
+#v_wikipedia_reader #cm_wiki_maintext ul{
     margin-left: 36pt;
 }
-div#cm_wiki_maintext table{
+#v_wikipedia_reader #cm_wiki_maintext table{
     margin: auto;
 }
 
-div#cm_wiki_maintext ul, div#cm_wiki_maintext table,div#cm_wiki_maintext pre{
+#v_wikipedia_reader #cm_wiki_maintext ul, div#cm_wiki_maintext table,div#cm_wiki_maintext pre{
     background: lightgoldenrodyellow;
     margin-bottom: 2em;
 }
 
-div#cm_wiki_maintext ul,div#cm_wiki_maintext ul *, div#cm_wiki_maintext pre, div#cm_wiki_maintext pre *{
+#v_wikipedia_reader #cm_wiki_maintext ul,div#cm_wiki_maintext ul *, div#cm_wiki_maintext pre, div#cm_wiki_maintext pre *{
     font-family: sans-serif;
     font-size: 12px;
     list-style: none;
@@ -99,29 +99,29 @@ div#cm_wiki_maintext ul,div#cm_wiki_maintext ul *, div#cm_wiki_maintext pre, div
 
 }
 
-div#cm_wiki_maintext a, div#cm_wiki_maintext sup,div#cm_wiki_maintext i {
+#v_wikipedia_reader #cm_wiki_maintext a, div#cm_wiki_maintext sup,div#cm_wiki_maintext i {
     margin: 0;
     padding: 0;
 }
 
-div#cm_wiki_maintext li:before {content: "- ";}
+#v_wikipedia_reader #cm_wiki_maintext li:before {content: "- ";}
 
-div#cm_wiki_maintext h3,div#cm_wiki_maintext h4 {
+#v_wikipedia_reader #cm_wiki_maintext h3,div#cm_wiki_maintext h4 {
     font-size: 14px;
     font-weight: bolder;
 }
 
-div#cm_wiki_maintext table * {
+#v_wikipedia_reader #cm_wiki_maintext table * {
     font-size: 10px;
 }
 
-div#cm_wiki_maintext th,div#cm_wiki_maintext th * {
+#v_wikipedia_reader #cm_wiki_maintext th,div#cm_wiki_maintext th * {
     font-weight: bold;
     font-size: 7pt !important;
     vertical-align: initial;
 }
 
-div#cm_wiki_maintext td {
+#v_wikipedia_reader #cm_wiki_maintext td {
     vertical-align: initial;
     white-space: nowrap;
     overflow:hidden !important;
@@ -129,7 +129,7 @@ div#cm_wiki_maintext td {
 }
 
 
-div#cm_wiki_notes_references {
+#v_wikipedia_reader #cm_wiki_notes_references {
     position: fixed;
     width: 70%;
 
@@ -149,27 +149,27 @@ div#cm_wiki_notes_references {
     overflow: scroll;
 }
 
-div#cm_wiki_notes_references.show{
+#v_wikipedia_reader #cm_wiki_notes_references.show{
     bottom: 0px;
 }
 
-div#cm_wiki_notes_references * {
+#v_wikipedia_reader #cm_wiki_notes_references * {
     font-family: sans-serif;
     font-size: 12px;
 }
 
-div#cm_wiki_maintext .highlightText{
+#v_wikipedia_reader #cm_wiki_maintext .highlightText{
     /*color: blue !important;*/
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: rgba(0,0,0,0.4) !important;
     background: linear-gradient(to right, rgba(200, 160, 200,0.5), rgba(240, 220, 100,0.7));
 }
 
-div#cm_wiki_maintext .module-content-wrapper{
+#v_wikipedia_reader #cm_wiki_maintext .module-content-wrapper{
     overflow-x: hidden;
 }
 
-div#cm_wiki_maintext sup{
+#v_wikipedia_reader #cm_wiki_maintext sup{
     width: 1px;
     height: 1px;
     visibility: hidden;
@@ -178,7 +178,7 @@ div#cm_wiki_maintext sup{
     opacity: 1;
 }
 
-div#cm_wiki_maintext>#sidebar {
+#v_wikipedia_reader #cm_wiki_maintext>#sidebar {
     top: 0;
     text-align: right;
     font-size: 10px;
@@ -186,11 +186,11 @@ div#cm_wiki_maintext>#sidebar {
     position: absolute;
 }
 
-div#cm_wiki_maintext>#sidebar>* {
+#v_wikipedia_reader #cm_wiki_maintext>#sidebar>* {
     position: absolute;
     right: 36px;
 }
 
-div#cm_wiki_maintext .refHandler-wrapper>a.formatted.reflink {
+#v_wikipedia_reader #cm_wiki_maintext .refHandler-wrapper>a.formatted.reflink {
     display: -webkit-box;
-}
+}#v_wikipedia_reader #cm_wiki_maintext .textnode.longtext{font-family:arial;}

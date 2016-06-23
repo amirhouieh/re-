@@ -309,11 +309,6 @@ module.exports.CssSelector = (function () {
 
 }).call(this);
 
-
-const grid = {
-    SIZE: 5
-}
-
 class Resizable{
 
     constructor(elem){
@@ -346,7 +341,6 @@ class Resizable{
 
     initResize(e){
         this.isOn = true;
-
         this.resizeHandlerX = e.clientX;
         this.resizeHandlerY = e.clientY;
         this.startWidth = parseInt(document.defaultView.getComputedStyle(this.elem).width, 10);
@@ -360,12 +354,12 @@ class Resizable{
     }
 
     kill(){
-        this.isOn = false;
-        this.elem = null;
         document.documentElement.removeEventListener('mousemove', (e)=>this.resize(e), false);
         document.documentElement.removeEventListener('mouseup', (e)=>this.stop(e), false);
         this.resizeHandler.parentNode.removeChild( this.resizeHandler );
-
+        this.elem.classList.remove('resizable');
+        this.isOn = false;
+        this.elem = null;
         return null;
     }
 
@@ -389,7 +383,6 @@ class Resizable{
     }
 
 }
-
 class Draggable{
 
     constructor(elem){
@@ -403,6 +396,7 @@ class Draggable{
     }
 
     init(){
+
         this.elem.classList.add('draggable');
         this.elem.onmousedown = (e)=>this.initDrag(e);
         this.elem.onmousemove = (e)=>this.drag(e);
@@ -448,12 +442,11 @@ class Draggable{
         this.elem.onmousedown = null
         this.elem.onmousemove = null
         this.elem.onmouseup = null
+        this.elem.classList.remove('draggable');
         return null;
     }
 
 }
-
-
 module.exports.doc = {
 
     createElement: (elemtag)=>{
@@ -471,4 +464,18 @@ module.exports.doc = {
     },
     draggable: Draggable,
     resizable: Resizable
+}
+module.exports.jsonToCss = function (costumeCss) {
+
+    let cssQuery = "";
+
+    _.each(costumeCss,(cssBlock,cssSelector)=>{
+        cssQuery += cssSelector + "{";
+        _.each(cssBlock,(rule)=>
+            cssQuery += rule.name + ':' + rule.value + ';'
+        );
+        cssQuery += "}";
+    });
+
+    return cssQuery;
 }

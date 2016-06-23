@@ -20,13 +20,12 @@ class EditorMenuContent extends PageSuperClass{
         this.addModulesIcons();
     }
 
-    update(){
-        return false;
-    }
-
     addModulesIcons(){
         let activeGallery = this.html.find('#active');
         let restGallery = this.html.find('#rest');
+
+        activeGallery.innerHTML = "";
+        restGallery.innerHTML = "";
 
         _.each(this.icons.true,(icon)=> activeGallery.appendChild(icon.element));
         _.each(this.icons.false,(icon)=> restGallery.appendChild(icon.element));

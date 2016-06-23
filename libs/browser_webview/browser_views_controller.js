@@ -80,32 +80,46 @@ class ViewsController{
         }
 
     }
+    
+    unsetEditMode(){
+        
+        if(!this.editor)
+            return;
 
-    setHomePage(){
-        this.currentViewId = "v_homepage";
-        this.updateCurrentView();
+        this.editor.kill();
+        this.editor = null;
+
+        //refresh the page
+        setTimeout(()=>refresh(),500);
     }
 
     setEditMode(){
         let currentView = this.all[this.currentViewId];
-        this.isEditMode = true;
-
         const Editor = require('./editor/browser_editor');
 
         this.editor = new Editor(currentView);
         this.editor.init();
+        this.editor.onKill = ()=>this.unsetEditMode();
     }
 
     init(webview){
         this.webView = webview;
+        let homePageColorList = []
 
         this.each((view)=> {
             view.init();
             this.colorList[view.id] = view.colorTheme;
+
+            _.each(view.colorTheme,(color)=>{
+                homePageColorList.push(color);
+            })
+
             webview.appendChild(view.element.wrapper);
         });
         
+        this.all['v_homepage'].colorTheme = homePageColorList;
     }
+
 
     updateCurrentView(uri, html){
         let currentView = this.all[this.currentViewId];

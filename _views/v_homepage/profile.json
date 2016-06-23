@@ -2,7 +2,7 @@
   "title": "Homepage",
   "description": "default home page for Re-",
   "author": "Amir Houieh",
-  "urls": ["home"],
+  "urls": [":home"],
   "script": "script.js",
   "active": true,
   "theme": "theme.css",

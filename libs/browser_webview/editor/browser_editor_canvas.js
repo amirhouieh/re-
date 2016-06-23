@@ -26,6 +26,25 @@ class Canvas{
         });
     }
 
+    kill(){
+        this.resetAll();
+    }
+
+    reset(){
+        _.each(this.modules,(module)=>{
+            let allNodes = module.wrapper.querySelectorAll('*');
+            removeInlineStyle(module.wrapper);
+            _.each(allNodes,removeInlineStyle);
+        });
+        this.resetAll();
+    }
+
+    update(view){
+        this.modules = {};
+        this.kill();
+        this.init(view);
+    }
+
     select(moduleId,callback){
 
         if(moduleId==this.currentMudleId) {
@@ -64,10 +83,18 @@ class Canvas{
         this.resizable = this.resizable.kill();
         this.draggable = this.draggable.kill();
         this.currentMudleId = null;
+        this.somthingIsSelected = false;
         _.each( this.modules,(me)=> me.unhighlight() );
 
     }
+}
 
+
+function removeInlineStyle(node){
+    let inlineStyle = node.getAttribute('style');
+    if(inlineStyle){
+        node.removeAttribute('style');
+    }
 }
 
 module.exports = Canvas;

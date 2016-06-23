@@ -1,20 +1,25 @@
 const NavigationController = require('./libs/browser_ui/browser-navigation-controller');
 const ViewsController = require('./libs/browser_webview/browser_views_controller');
+const HistoryManager = require('./libs/history-manager');
+const {ipcRenderer} = require('electron');
 
 const views = new ViewsController();
+const history = new HistoryManager();
+
 var navigateHandler;
+var refresh;
+var currentUrl;
 
-const {ipcRenderer} = require('electron');
 views.load();
-
 ipcRenderer.send('url-to-chrome', 'test');
 
-
 onload = function() {
+
 
     var _$ = function(query) {
       return document.querySelector(query);
     }
+
 
     const nav = new NavigationController(_$);
     
@@ -27,11 +32,22 @@ onload = function() {
 
     views.init(webView);
     nav.init(views.colorList);
-
+    history.init();
+    
     function goToEditMode(e) {
-        nav.setEditMode();
+
+        if(views.editor) {
+            views.unsetEditMode();
+            nav.toggleMenu();
+            return
+        }
+
         views.setEditMode();
     }
+
+    refresh = () =>{
+        navigateHandler(currentUrl);
+    };
 
     navigateHandler = (link)=>{
 
@@ -49,17 +65,22 @@ onload = function() {
         //     ipcRenderer.send('url-to-chrome', url||nav.locationInput.value);
         // },500)
 
+        if(nav.isMenuOpen){
+            nav.toggleMenu();
+        }
+
+        if(views.editor){
+            views.unsetEditMode();
+            return;
+        }
+
         nav.go(url,{
             success: (uri,_html)=>{
-
-                if(!uri){
-                    views.setHomePage();
-                    nav.resetBarColor();
-                    return;
-                }
                 
                 views.update(uri,_html);
                 nav.updateBarColor(views.currentViewId);
+                history.add(url,_html);
+                currentUrl = url;
                 
             },
             error: (err)=>{
@@ -69,11 +90,12 @@ onload = function() {
 
     }
 
-    nav.form.onsubmit = function(e) {
+    nav.form.onsubmit = (e)=>{
         e.preventDefault();
         navigateHandler();
     };
 
+    window.onbeforeunload = (e) => history.updateStorage(e);
     linkToEditMode.onclick = (e)=> goToEditMode(e);
     navigateHandler();
 }
