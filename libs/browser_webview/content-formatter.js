@@ -51,7 +51,7 @@ function Formatter(){
             //     return doc(this).html();
             // }
 
-            return doc(this).replaceWith('<a href="javascript:;" title="'+href+'" class="link formatted" onclick="navigateHandler(this);" _href="'+ href +'">' + doc(this).html() + '</a>');
+            return doc(this).replaceWith('<a href="javascript:;" title="'+href+'" class="link formatted" onclick="navigate(this);" _href="'+ href +'">' + doc(this).html() + '</a>');
         },
 
         "images": function () {

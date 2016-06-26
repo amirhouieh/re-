@@ -1,7 +1,8 @@
 body {
-    /*font-family: monospace;*/
+    font-family: Helvetica;
     /*font-family: 'PT Mono';*/
-    font-family: 'Source Code Pro';
+    /*font-family: 'Source Code Pro';*/
+    /*font-family: Georgia;*/
     line-height: 1.4em;
     font-size: 14px;
     overflow: hidden;
@@ -18,6 +19,11 @@ a{
 }
 
 /*-----------------NAVIGATION BAR------------------*/
+div#controllers {
+    z-index: 99999999999999999999999;
+    background: white;
+}
+
 nav#navigation-bar{
     position: fixed;
     z-index: 9999999999999;
@@ -25,6 +31,7 @@ nav#navigation-bar{
     height: 30px;
     background: white;
 }
+
 
 nav#navigation-bar *{
     -webkit-user-select: none;
@@ -91,19 +98,15 @@ button{
     background: transparent;
     box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
     color: white;
-    font-family: helvetica !important;
-    /*width: calc(20% - 10px);*/
+    font-size: 0.8rem;
+    letter-spacing: 0.1vw;
+    font-weight: lighter;
 }
 
 button:hover{
     background: rgba(0,0,0,0.2);
 }
 
-div#navigation-bar-wrapper * {
-    font-size: 0.8rem;
-    letter-spacing: 0.1vw;
-    font-weight: lighter;
-}
 #navigation-bar-wrapper.extended{
     height: 35px;
     text-align: center;
@@ -181,7 +184,7 @@ section.view-wrapper {
     overflow: scroll;
 }
 
-.module-wrapper.resizable {
+.module-wrapper {
     position: absolute;
     overflow: auto
 }
@@ -222,7 +225,6 @@ ul#suggestionList {
     background: transparent;
 
     transition: height 500ms;
-    /* border: 1px solid; */
 }
 
 ul#suggestionList>li{
@@ -234,4 +236,186 @@ ul#suggestionList>li{
 
 ul#suggestionList>li.selected{
     color: black;
+}
+
+
+div#re-menu-pages-wrapper {
+    position: absolute;
+    top: 61px;
+    height: 0;
+    padding-left: 32px;
+    padding-right: 32px;
+    color: white;
+    font-weight: lighter;
+    width: calc(100% - 64px);
+    overflow: hidden;
+    z-index: -1;
+    transition: height 500ms;
+}
+
+div#re-menu-pages-wrapper.open {
+    height: 100vh;
+}
+
+.re-menu-page {
+    position: absolute;
+    top: 1em;
+    bottom: 2em;
+    width: calc(100% - 64px);
+    opacity: 0;
+    transition: opacity 500ms;
+}
+
+.re-menu-page.selected{
+    opacity: 1;
+    z-index: 9999999999999999;
+}
+
+strong.re-menu-page-title {
+    margin-bottom: 2em;
+    display: block;
+}
+
+article.re-menu-page-content {
+    max-width: 600px;
+}
+
+.re-menu-page-content p {
+    margin-bottom: 1em;
+}
+
+ul.re-menu-page-content {
+    list-style: none;
+    max-height: 87%;
+    /* width: 100%; */
+    /* background: aqua; */
+    /* display: flex; */
+    position: relative;
+    overflow: auto;
+}
+
+li.shortcut-wrapper {
+    line-height: 2.6em;
+}
+
+span.shortcut-key {
+    min-width: 48px;
+    display: -webkit-inline-box;
+}
+.re-menu-page-content ul {
+    list-style: none;
+    padding-bottom: 1em;
+    margin-bottom: 3em;
+}
+
+.re-menu-page-content ul>strong {
+    margin-bottom: 1em;
+    display: block;
+}
+
+.re-menu-page-content ul time {
+    margin-right: 30px;
+    /* float: left; */
+    height: 100px;
+}
+
+.item-content-wrapper {
+    display: inline-table;
+}
+
+.re-menu-page-content .itemTitle {
+    max-width: 500px;
+    margin-bottom: 0.5em;
+    font-size: 4em;
+    line-height: 1em;
+    /* overflow: hidden; */
+    display: -webkit-box;
+}
+
+.re-menu-page-content i {
+    display: block;
+}
+.page-handlers {
+    position: absolute;
+    top: 1em;
+    right: 0;
+}
+.re-menu-page-content {
+    overflow: auto;
+    display: block;
+    height: 87%;
+    padding-bottom: 10%;
+}
+.re-menu-page-content li.historyItem {
+    margin-bottom: 7em;
+}
+
+
+.view-input-wrapper label {
+    display: block;
+}
+
+.view-input-wrapper input,.view-input-wrapper textarea {
+    height: 20px;
+    padding-left: 4px;
+    background: transparent;
+    width: 98%;
+    color: white;
+    margin-left: 2px;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.35);
+}
+.view-input-wrapper .menu-button{
+    margin-left: 2px;
+}
+
+.view-input-wrapper {
+    margin-bottom: 1em;
+}
+
+textarea {
+    min-height: 60px;
+    max-width: 98%;
+    padding-top:4px;
+}
+
+.view-inputs-wrapper {
+    width: 49%;
+    /* display: inline-block; */
+    float: left;
+}
+
+.iconImage {
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+    float: left;
+}
+
+p.iconContent {
+    width: 60%;
+    position: absolute;
+    left: 130px;
+    top: 22px;
+}
+
+.moduleIcon {
+    width: 100%;
+    height: 135px;
+    position: relative;
+    cursor: default;
+}
+
+.moduleIcon:hover{
+    opacity: 0.5;
+}
+
+p.iconContent>* {
+    display: block;
+}
+
+div#module-gallery {
+    height: 100%;
+    overflow: auto;
+    max-width: 400px;
 }

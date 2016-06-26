@@ -43,6 +43,17 @@ class ContentModuleObj{
         elem.element.style.borderBottom = "1px solid " + this.profile.color;
         elem.element.setAttribute('module-id',this.id);
 
+        elem.element.onclick = (e)=>{
+
+            let isSelected = elem.element.classList.toggle('selected');
+
+            if(!isSelected){
+                elem.element.style.background = 'transparent';
+            }else{
+                elem.element.style.background = this.profile.color;
+            }
+        }
+
         return elem;
     }
     

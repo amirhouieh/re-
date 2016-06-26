@@ -18,6 +18,7 @@ class Template{
         this.createFromHtml(rawHtml,props);
         return this;
     }
+    
 
     readHtml(_path){
         return readFileSync(_path);

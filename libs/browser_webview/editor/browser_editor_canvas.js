@@ -61,7 +61,7 @@ class Canvas{
         this.draggable = new $.draggable(this.getCurrentModule().wrapper);
 
         this.resizable.onresize = (w,h)=> callback(w,h);
-        this.draggable.ondrag = (w,h)=> callback(w,h);
+        this.draggable.ondrag = (x,y)=> callback(x,y);
         this.somthingIsSelected = true;
 
         this.highlight();

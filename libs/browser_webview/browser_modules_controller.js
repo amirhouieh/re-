@@ -15,7 +15,7 @@ const modules_dir = path.join(app_root, "_modules");
 class ModulesController{
 
     constructor(){
-        this.canvas = [];
+        this.all = [];
     }
 
     loadAll(callback) {
@@ -29,7 +29,7 @@ class ModulesController{
 
         let modulesPaths = walkSync(modules_dir,walkSyncOptions);
 
-        this.canvas = modulesPaths.map(
+        this.all = modulesPaths.map(
             (modulesPath)=> self.loadOne(path.dirname(modulesPath))
         )
 
@@ -38,7 +38,7 @@ class ModulesController{
     }
 
     getIcons(view){
-        let icons = _.groupBy(this.canvas,(module)=> view.hasModule(module.id) );
+        let icons = _.groupBy(this.all,(module)=> view.hasModule(module.id) );
 
         icons.true = icons.true.map((module)=>module.getIconElement());
         icons.false = icons.false.map((module)=>module.getIconElement());
@@ -54,8 +54,8 @@ class ModulesController{
     }
 
     each(callback){
-        for(var x in this.canvas)
-            callback(this.canvas[x])
+        for(var x in this.all)
+            callback(this.all[x])
     }
 
 }

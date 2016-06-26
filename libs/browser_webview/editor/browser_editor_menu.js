@@ -28,26 +28,23 @@ class EditorMenu{
         this.pageHandlers = this.html.findAll('.page-handler');
         this.pages = {};
 
+        this.pages.DESIGN = new DesignPageClass();
+        this.pages.CONTENT = new ContentPageClass();
+        this.pages.INFO = new InfoPageClass();
+
         this.onChange = null;
     }
 
     init(view){
 
-        this.pages.DESIGN = new DesignPageClass();
-        this.pages.CONTENT = new ContentPageClass();
-        this.pages.INFO = new InfoPageClass();
-
         this.pages.INFO.init(view);
         this.pages.DESIGN.init(view);
         this.pages.CONTENT.init(view);
-        this.setBackgroundColor(view);
 
-        setTimeout(()=> {
-            this.toggle();
-            this.appendComponents()
-            this.attachEvents();
-        },10);
+        this.appendComponents()
+        this.attachEvents();
 
+        setTimeout(()=>this.stopLoading(), 1000);
     }
 
     update(view){
@@ -112,7 +109,7 @@ class EditorMenu{
     }
 
     toggle(){
-        this.highlight();
+        // this.highlight();
         $.toggleClass(this.html.element,"extended");
     }
 

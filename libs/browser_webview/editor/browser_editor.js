@@ -18,7 +18,7 @@ class Editor{
     constructor(currentView){
         this.view = currentView;
         this.menu = new EditorMenu();
-        this.canvas = new EditorCanvas();
+        this.all = new EditorCanvas();
         this.currentModule = 0;
         this.isSet = true;
         this.onKill = null;
@@ -28,17 +28,28 @@ class Editor{
         let self = this;
 
         this.appendMenu();
-        this.menu.init(this.view);
-        this.canvas.init(this.view);
 
-        this.setModuleAsSelectedElement();
-        this.attachEvents();
+
+        this.menu.setBackgroundColor(this.view);
+
+        setTimeout(()=>{
+            this.menu.toggle();
+            this.menu.loading();
+        },10);
+
+        setTimeout(()=>{
+            this.all.init(this.view);
+            this.menu.init(this.view);
+            this.setModuleAsSelectedElement();
+            this.attachEvents();
+        },1000);
+
     }
 
     update(view){
         this.view = view;
         this.menu.update(this.view);
-        this.canvas.update(this.view);
+        this.all.update(this.view);
     }
 
     kill(){
@@ -47,7 +58,7 @@ class Editor{
             return;
 
         this.menu.kill();
-        this.canvas.kill();
+        this.all.kill();
         this.isSet = false;
         this.onKill();
     }
@@ -72,7 +83,7 @@ class Editor{
 
             module.element.onclick = (e)=> {
 
-                if(this.canvas.draggable||this.canvas.resizable)
+                if(this.all.draggable||this.all.resizable)
                     return;
 
                 editor.currentModule = module;
@@ -92,7 +103,7 @@ class Editor{
                 this.resizable = true;
                 this.draggable = true;
 
-                this.canvas.select(module.id,(...args)=>{
+                this.all.select(module.id,(...args)=>{
                     this.menu.pages.DESIGN.updateFields();
                 });
                 
@@ -103,15 +114,19 @@ class Editor{
     }
 
     reset(){
-        this.canvas.reset();
+        this.all.reset();
         this.menu.pages.DESIGN.reset();
     }
 
     save(){
         let costumeStyle = this.menu.pages.DESIGN.getCssRules();
 
+        console.log('save', costumeStyle)
+
         if(!costumeStyle)
             return;
+
+
 
         this.menu.loading();
         this.view.updateTheme(costumeStyle,(err)=>{

@@ -151,6 +151,7 @@ class EditorMenuDesign extends PageSuperClass{
     }
 
     updateCssRules(cssProp){
+        
         let query = this.currentModuleSelector==this.querySelector?
                         this.currentModuleSelector :
                         this.currentModuleSelector+' ' + this.querySelector;
@@ -197,8 +198,10 @@ class EditorMenuDesign extends PageSuperClass{
         _.each(this.inputs,(input)=>{
             let cssPropName = input.data.name;
             let cssPropValue = this.selectedElementStyle.getPropertyValue(cssPropName);
-            if(cssPropValue.length)
+            if(cssPropValue.length) {
                 input.setVal(cssPropValue);
+                this.updateCssRules({name: cssPropName,value: cssPropValue});
+            }
         });
 
     }

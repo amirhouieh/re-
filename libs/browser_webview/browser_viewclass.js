@@ -3,7 +3,7 @@
  */
 
 const join = require('path').join;
-const {readFileSync,writeFile} = require('fs');
+const {readFileSync,writeFile,writeFileSync} = require('fs');
 const readJsonSync = require('fs-extra').readJsonSync;
 const _ = require('lodash');
 
@@ -34,6 +34,11 @@ class View{
         this.modules = this.profile.content_modules.map(
             (moduleId)=> mc.loadOne(moduleId)
         );
+    }
+
+    deactivate(){
+        this.profile.active = false;
+        writeFileSync(join(this.dir,'profile.json'), JSON.stringify(this.profile));
     }
 
     updateTheme(costumeCss,callback){

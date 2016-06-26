@@ -3,22 +3,25 @@
  */
 
 const _ = require('lodash');
+var dateFormat = require('dateformat');
+
 const storage = require('electron-json-storage');
 // const HistoryItem = require('./history-item');
 var itemList = [];
 
 const titleRegex = /<title[^>]*>([^<]+)<\/title>/;
+const protocolRegex = /.*?:\/\//g;
 
 class HistoryItem{
 
     constructor(url,title){
         this.url = url.toLowerCase();
         this.title = title.toLowerCase();
-        this.count = 0;
+        this.time = new Date().getTime();
+        this.count = 1;
     }
 
 }
-
 
 class History{
 
@@ -34,7 +37,6 @@ class History{
             itemList = data.length? data:[];
             console.log('initial list',itemList)
         });
-
     }
 
     add(url,_html){
@@ -52,8 +54,10 @@ class History{
             itemList.push(new HistoryItem(url,title));
 
         //otherwise we only increase the count
-        else
+        else {
             itemInHistory[0].count += 1;
+            itemInHistory[0].time = new Date().getTime();
+        }
 
     }
 
@@ -61,6 +65,54 @@ class History{
         return itemList;
     }
 
+    clear(callback){
+        itemList = [];
+        storage.clear((err)=>callback);
+    }
+
+    getHistoryList(){
+
+        let newList =
+            _.cloneDeep(itemList)
+            .sort((a,b)=>b.time-a.time)
+            .map((item)=>
+                {
+                    let date = new Date(item.time);
+
+                    item.time = {
+                        ms: item.time,
+                        date: dateFormat(date, "dddd, mmmm dS, yyyy"),
+                        detailDate: dateFormat(date, 'h:MM tt')
+                    };
+
+                    return item;
+                });
+
+        newList = _.groupBy(newList,(item)=>item.time.date);
+        return Object.keys(newList).length? newList:null;
+    }
+
+    itemElementForAdressBar(item){
+        let li = document.createElement('li');
+        li.setAttribute('url',item.url)
+        li.innerHTML = item.url + ' | <small><i>'+item.title.slice(0,40) + '... <small class="count">(visits:'+ item.count  + ')</small></i>';
+        return li;
+    }
+
+    itemElementForHistoryPage(item){
+        let li = document.createElement('li');
+        let time = '<time>'+item.time.detailDate+'</time>';
+        let itemContentWrapper = '<div class="item-content-wrapper">';
+
+        let link = '<small><i><a href="javascript:;" onclick="navigate(this);" _href="'+ item.url +'">' + item.url.replace(protocolRegex,'') +'</i></a></small>';
+        let title = '<span class="itemTitle">' + item.title + '</span>';
+        let visits = '<small>you have visited this page '+ item.count  + ' times</small></i>';
+
+        li.innerHTML = time + itemContentWrapper + title + link + visits + '</div>';
+        li.className = "historyItem";
+        return li;
+    }
+    
     updateStorage(e){
 
         if(!itemList.length)

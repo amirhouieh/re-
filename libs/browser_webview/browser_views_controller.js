@@ -19,6 +19,7 @@ class ViewsController{
         this.webView = null;
         this.colorList = {}
         this.isEditMode = false;
+        this.urls = [];
     }
 
     load(callback) {
@@ -79,6 +80,18 @@ class ViewsController{
             this.switchView(uri,html)
         }
 
+    }
+
+    getViewsForUrl(urls){
+
+        return _.filter(this.all,(view)=>{
+            let has = false;
+            _.each(urls,(url)=>{
+                has = view.profile.urls.includes(url);
+                console.log(url, has);
+            })
+            return has;
+        })[0];
     }
     
     unsetEditMode(){

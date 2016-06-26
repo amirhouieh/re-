@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-    <link rel="stylesheet" href="resources/fonts/source%20code%20pro/source-code-pro.css" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="resources/fonts/PTMonoWeb/stylesheet.css" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="browser_ui.css" type="text/css">
+    <link rel="stylesheet" href="browser.css" type="text/css">
 
     <script src="browser.js"></script>
 
@@ -32,15 +30,126 @@
       <div id="navigation-bar-wrapper">
         <div id="navigation-bar-bottomLine"></div>
         <section id="menu-content">
-            <button type="button" class="menu-button" id="info">info</button>
-            <button type="button" class="menu-button" id="shortcuts">shortcuts</button>
-            <button type="button" class="menu-button" id="viewEditor">veiw editor</button>
-            <button type="button" class="menu-button" id="modulesEditor">modules editor</button>
-            <button type="button" class="menu-button" id="newViewer">create new view</button>
+            <button type="button" class="menu-button page-button" id="info">info</button>
+            <button type="button" class="menu-button page-button" id="shortcuts">shortcuts</button>
+            <button type="button" class="menu-button page-button" id="history">history</button>
+            <button type="button" class="menu-button" id="viewEditor">view editor</button>
+            <button type="button" class="menu-button page-button" id="newView">create new view</button>
         </section>
-
       </div>
 
+      <div id="re-menu-pages-wrapper">
+        <div class="re-menu-page" for="info">
+          <strong class="re-menu-page-title">About</strong>
+          <div class="page-handlers">
+            <button type="button" class="menu-button page-close-button">close</button>
+          </div>
+          <article class="re-menu-page-content">
+            <p>
+            Re- is a modular and content-driven web browser.
+            </p>
+            <p>
+             Designers today face a new paradigm in which readers have become users, more cohesively utilizing digital means of mass communication and information exchange. As a graphic designer I find the utilization of web browsers as the most effective and relevant means in which we can work within this phenomenon.
+            </p>
+            <p>
+            Re- as a modular platform gives the user more power over design and content structure, which in turn works by cutting out unnecessary noise from a webpage. It functions as a more focused work tool which is exponentially efficient and reliable in terms of reading experience and information consumption on the web. Re- shifts the user’s experience of reading information and browsing the web; users decide which information they want to see, by completely customising their browsing experience.
+            </p>
+            <a href="javascript:;" onclick="navigate(this)" _href="http://re-browser.github.io">re- web page</a>
+            <a href="javascript:;" onclick="navigate(this)" _href="http://github.com/re-browser">source code</a>
+          </article>
+        </div>
+        <div class="re-menu-page" for="shortcuts">
+          <strong class="re-menu-page-title">Shortcuts</strong>
+
+          <div class="page-handlers">
+            <button type="button" class="menu-button page-close-button">close</button>
+          </div>
+
+          <ul class="re-menu-page-content">
+
+            <li class="shortcut-wrapper">
+              <span class="shortcut-key"><span class="key">&#x232b;</span></span>
+              <span class="shortcut-label">previous page</span>
+            </li>
+            <li class="shortcut-wrapper">
+              <span class="shortcut-key"><span class="key">&#x2318;</span><span class="key">R</span></span>
+              <span class="shortcut-label">refresh</span>
+            </li>
+            <li class="shortcut-wrapper">
+              <span class="shortcut-key"><span class="key">&#x2318;</span><span class="key">H</span></span>
+              <span class="shortcut-label">history</span>
+            </li>
+            <li class="shortcut-wrapper">
+              <span class="shortcut-key"><span class="key">&#x2318;</span><span class="key">F</span></span>
+              <span class="shortcut-label">find</span>
+            </li>
+            <li class="shortcut-wrapper">
+              <span class="shortcut-key"><span class="key">&#x2318;</span><span class="key">&#x21E7;</span><span class="key">F</span></span>
+              <span class="shortcut-label">full screen</span>
+            </li>
+            <li class="shortcut-wrapper">
+              <span class="shortcut-key"><span class="key">&#x2318;</span><span class="key">+/-</span></span>
+              <span class="shortcut-label">zoom in/out</span>
+            </li>
+            <li class="shortcut-wrapper">
+              <span class="shortcut-key"><span class="key">&#x2318;</span><span class="key">P</span></span>
+              <span class="shortcut-label">print</span>
+            </li>
+          </ul>
+        </div>
+        <div class="re-menu-page" for="history">
+          <strong class="re-menu-page-title">History</strong>
+          <div class="page-handlers">
+            <button type="button" class="menu-button" id="clearHistory">clear history</button>
+            <button type="button" class="menu-button page-close-button">close</button>
+          </div>
+          <div class="re-menu-page-content">
+          </div>
+        </div>
+
+        <div class="re-menu-page" for="newView">
+          <strong class="re-menu-page-title">new view</strong>
+
+          <div class="page-handlers">
+            <button type="button" class="menu-button" id="create">create</button>
+            <button type="button" class="menu-button page-close-button">close</button>
+          </div>
+
+
+          <div class="re-menu-page-content">
+            <form class="view-inputs-wrapper" id="view-info">
+
+            <strong class="re-menu-page-title">info</strong>
+
+            <div class="view-input-wrapper">
+              <label>view name</label>
+              <input type="text" class="input" name="title">
+            </div>
+            <div class="view-input-wrapper">
+              <label>view author</label>
+              <input type="text" class="input" name="author">
+            </div>
+            <div class="view-input-wrapper">
+              <label>view description</label>
+              <textarea type="text" class="input" name="description"></textarea>
+            </div>
+            <div class="view-input-wrapper">
+              <label>enter the page url(s)</label>
+              <input type="text" class="input" name="url">
+              <button type="button" class="menu-button"><h1>+</h1></button>
+            </div>
+
+          </form>
+            <div class="view-inputs-wrapper" id="module-gallery">
+              <strong class="re-menu-page-title">modules</strong>
+            </div>
+          </div>
+
+
+        </div>
+
+
+      </div>
     </nav>
 
     <!--web view | canvas -->
