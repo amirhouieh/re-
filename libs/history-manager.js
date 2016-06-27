@@ -92,10 +92,24 @@ class History{
         return Object.keys(newList).length? newList:null;
     }
 
+    getTopVisits(){
+        return _.cloneDeep(itemList)
+                    .sort((a,b)=>b.count-a.count)
+                    .slice(0,3)
+    }
+
     itemElementForAdressBar(item){
         let li = document.createElement('li');
         li.setAttribute('url',item.url)
         li.innerHTML = item.url + ' | <small><i>'+item.title.slice(0,40) + '... <small class="count">(visits:'+ item.count  + ')</small></i>';
+        return li;
+    }
+
+    itemElementForHomePage(item){
+        let li = document.createElement('li');
+        let title = '<span class="itemTitle"><a href="javascript:;" onclick="navigate(this);" _href="'+ item.url +'">' + item.title +'</a></span>';
+        let link = '<small>' + item.url.replace(protocolRegex,'') + '</small>';
+        li.innerHTML = title + link;
         return li;
     }
 

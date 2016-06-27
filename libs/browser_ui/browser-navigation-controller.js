@@ -55,7 +55,7 @@ class Navigation{
         );
 
         clearHistoryHandler.onclick = (e)=> {
-            history.clear((err)=>{
+           localHistoryhistory.clear((err)=>{
                 if(!err){
                     self.showHistory();
                 }
@@ -88,7 +88,7 @@ class Navigation{
                 input.parentNode.classList.add('error');
                 errors.push(input);
             }
-            if(input.name=="urls"){
+            if(input.name=="url"){
                 urls.push(input.value.trim());
             }
         })
@@ -107,13 +107,11 @@ class Navigation{
                 viewForUrls.deactivate();
         }
 
-        // let viewData = _.map(inputs,(input=>{
-        //     profileProp: input.name
-        // })
-
-        views.createView()
-
-
+        // let viewData = localHistory.map(inputs,(input));
+        
+        // views.createView()
+        
+        
         console.log(urls);
         console.log(inputs);
 
@@ -172,7 +170,7 @@ class Navigation{
     }
 
     showHistory(){
-        let list = history.getHistoryList();
+        let list = localHistory.getHistoryList();
         let listContent = this.currentOpenPage.querySelector('.re-menu-page-content');
 
         listContent.innerHTML = "";
@@ -189,7 +187,7 @@ class Navigation{
             ul.appendChild(dayElem);
 
             _.each(day, (item)=>{
-                ul.appendChild( history.itemElementForHistoryPage(item) );
+                ul.appendChild( localHistory.itemElementForHistoryPage(item) );
             })
 
             listContent.appendChild(ul);
@@ -229,10 +227,10 @@ class Navigation{
 
         this.resetSuggestionList();
 
-        this.matchItems = history.getList().filter((item)=>
+        this.matchItems = localHistory.getList().filter((item)=>
             item.url.indexOf(text) >-1 || item.title.indexOf(text) >-1
         ).map((item)=>{
-            let li = history.itemElementForAdressBar(item);
+            let li = localHistory.itemElementForAdressBar(item);
             this.suggestionList.appendChild(li);
             return li;
         });

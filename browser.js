@@ -4,16 +4,25 @@ const HistoryManager = require('./libs/history-manager');
 const {ipcRenderer} = require('electron');
 
 const views = new ViewsController();
-const history = new HistoryManager();
+const localHistory = new HistoryManager();
+
+const msgList = {
+    DEFAULT: 'url-for-chrome',
+    VIDEO: 'video',
+    CONNECTION: 'connection-success',
+    HOME: 'homepage'
+}
+
 
 var navigate;
 var refresh;
 var currentUrl;
 
 views.load();
-history.init();
+localHistory.init();
 
-ipcRenderer.send('url-to-chrome', 'test');
+ipcRenderer.send(msgList.CONNECTION,'re is connected to chrome!');
+
 
 onload = function() {
 
@@ -26,9 +35,28 @@ onload = function() {
 
     var webView = _$('#webview');
     var linkToEditMode = _$('#viewEditor');
+    let video = _$('#video');
+    let videoPlayHandler = document.querySelector('#fullscreen-handler');
+    let videoCancelHandler = document.querySelector('#cancel-fullScreen-handler');
+
+    let isIdleMode = false;
+    let idleTime = 10000;
+
+    var timer = null;
 
     views.init(webView);
     nav.init(views.colorList);
+
+    var playVideo = function(e) {
+        video.load();
+        video.classList.add('show');
+        video.play();
+    }
+
+    var stopVideo = function () {
+        video.pause();
+        video.classList.remove('show');
+    }
 
     var goToEditMode = (e) => {
 
@@ -58,9 +86,15 @@ onload = function() {
 
         url = url||nav.locationInput.value;
 
-        // setTimeout(()=>{
-        //     ipcRenderer.send('url-to-chrome', url||nav.locationInput.value);
-        // },500)
+        if(url==":home") {
+            ipcRenderer.send(msgList.HOME);
+            stopVideo();
+        }
+        else{
+            setTimeout(()=>{
+                ipcRenderer.send(msgList.DEFAULT, url);
+            },500)
+        }
 
         if(nav.isMenuOpen)
             nav.toggleMenu();
@@ -76,7 +110,7 @@ onload = function() {
             success: (uri,_html)=>{
                 views.update(uri,_html);
                 nav.updateBarColor(views.currentViewId);
-                history.add(url,_html);
+                localHistory.add(url,_html);
                 currentUrl = url;
             },
             error: (err)=>{
@@ -86,9 +120,36 @@ onload = function() {
 
     }
 
-    window.onbeforeunload = (e) => history.updateStorage(e);
+
+
+    function resetTimer(e) {
+
+
+        clearTimeout(timer);
+        //after idle time start video
+
+        if(isIdleMode){
+            console.log('stop video');
+            navigate(':home');
+            isIdleMode = false;
+        }
+
+        timer = setTimeout(()=>{
+            isIdleMode = true;
+            ipcRenderer.send(msgList.VIDEO);
+            playVideo();
+        }, idleTime);
+
+
+    }
+
+    window.onbeforeunload = (e) => localHistory.updateStorage(e);
     linkToEditMode.onclick = (e)=> goToEditMode(e);
 
+    document.onmousemove = resetTimer;
+    document.onkeypress = resetTimer;
+
     navigate();
+    resetTimer();
 
 }

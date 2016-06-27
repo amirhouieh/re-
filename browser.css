@@ -419,3 +419,21 @@ div#module-gallery {
     overflow: auto;
     max-width: 400px;
 }
+
+video#video {
+    position: fixed;
+    z-index: 999999999999999999999999999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+video#video.show{
+    display: block;
+}
+
+.module-content-wrapper.error{
+    display: none !important;
+}

@@ -19,15 +19,12 @@ module.exports = function(urlSet, html, lng) {
         var textualPageContent = extractTextualPage();
         var rawText = getNodeNetText.call(textualPageContent);
         var textRatio = textualPageContent.text().length/html.length;
-        
+
         //text-based page
         if( textualPageContent && (textRatio>=0.1 || rawText.length >=300 ) ) {
-
-            console.log('it is textual page');
             doc(textualPageContent).find('img').each((i,img)=>{
                 doc(this).remove();
             });
-
             return doc(textualPageContent);
         }
         

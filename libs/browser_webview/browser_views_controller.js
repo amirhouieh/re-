@@ -84,14 +84,18 @@ class ViewsController{
 
     getViewsForUrl(urls){
 
-        return _.filter(this.all,(view)=>{
+        let _view = _.filter(this.all,(view)=>{
             let has = false;
             _.each(urls,(url)=>{
-                has = view.profile.urls.includes(url);
-                console.log(url, has);
+                _.each(view.profile.urls,(_url)=>{
+                    has = _url.indexOf(url) >-1 || url.indexOf(_url) >-1;
+                })
             })
             return has;
         })[0];
+
+        return _view? _view:this.all['v_default_view'];
+
     }
     
     unsetEditMode(){

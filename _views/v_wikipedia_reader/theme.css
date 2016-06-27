@@ -188,7 +188,7 @@ div#cm_wiki_maintext a{
 
 #v_wikipedia_reader #cm_wiki_maintext>#sidebar>* {
     position: absolute;
-    right: 36px;
+    /*right: 36px;*/
 }
 
 #v_wikipedia_reader #cm_wiki_maintext .refHandler-wrapper>a.formatted.reflink {

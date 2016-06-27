@@ -24,7 +24,7 @@ class ContentModuleObj{
     }
 
     update(uri, html, callback){
-        this.element.innerHTML = Formatter.do( uri,this.script(uri, html) );
+        this.element.innerHTML = Formatter.do(uri,this.script(uri, html),this.id);
     }
     
     getIconElement(){

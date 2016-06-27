@@ -72,11 +72,9 @@ class View{
     }
 
     update(uri,html){
-
         this.each((module)=> {
             module.update(uri,html);
         });
-
     }
 
     hasModule(moduleId){

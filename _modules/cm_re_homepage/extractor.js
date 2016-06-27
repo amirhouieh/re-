@@ -9,6 +9,8 @@ module.exports = function (uri, rawHtml) {
 
     // let wrapper = doc('<div class="formatted">');
 
-    return '<p id="welcomenot" class="formatted"><strong>Wellcome to Re-</strong><span>your first modular content-driven web browser</span></p>';
+    // <h1 class="formatted">Re-</h1><p id="welcomenot" class="formatted"><strong>Wellcome to Re-</strong><span>your first modular content-driven web browser</span></p>
+    
+    return '<ul id="top-visits" class="formatted"></ul>';
 
 }

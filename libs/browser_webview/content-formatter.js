@@ -70,7 +70,7 @@ function Formatter(){
             // //add new attributes
             this.attribs.src = urlTool.relToAbs(uri,src);
             this.attribs.class = "formatted";
-            this.attribs.onerror = "console.log(this);this.parentNode.removeChild();"
+            this.attribs.onerror = "this.parentNode.removeChild(this);"
             return doc(this);
         },
 
@@ -89,17 +89,20 @@ function Formatter(){
 
     }
 
-    self.do = function(_uri,content, callback) {
+    self.do = function(_uri,content,moduleId) {
 
+        doc = cheerio.load('<div class="module-content-wrapper"></div>');
+        let contentDomObj = doc(content);
 
-         if(!content || !content.length){
+        console.log(moduleId, contentDomObj);
+
+         if(!contentDomObj.length){
              let contentWrapper = cheerio.load('<div class="module-content-wrapper">problem to load content!</div>');
-             return contentWrapper('.module-content-wrapper');
+             return contentWrapper('.module-content-wrapper').addClass('error');
          }
 
         uri = _uri;
-        doc = cheerio.load('<div class="module-content-wrapper"></div>');
-        let wrapper = doc('.module-content-wrapper').append(doc(content));
+        let wrapper = doc('.module-content-wrapper').append(contentDomObj);
 
         if(uri)
             wrapper.attr('name',uri.hostname)
