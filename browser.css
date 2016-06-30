@@ -4,7 +4,7 @@ body {
     /*font-family: 'Source Code Pro';*/
     /*font-family: Georgia;*/
     line-height: 1.4em;
-    font-size: 14px;
+    font-size: 18px;
     overflow: hidden;
 }
 
@@ -245,7 +245,7 @@ ul#suggestionList>li.selected{
 
 div#re-menu-pages-wrapper {
     position: absolute;
-    top: 61px;
+    top: 64px;
     height: 0;
     padding-left: 32px;
     padding-right: 32px;

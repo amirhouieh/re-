@@ -27,7 +27,7 @@ class ContentModuleObj{
     update(uri, html, callback){
         this.element.innerHTML = Formatter.do(uri,this.script(uri, html),this.id);
 
-        if(this.element.querySelector('.error')){
+        if(this.element.querySelector('.module-content-wrapper.error')){
             this.error = true;
         }else{
             this.error = false;

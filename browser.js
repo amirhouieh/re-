@@ -58,6 +58,7 @@ onload = function() {
     var stopVideo = function () {
         video.pause();
         video.classList.remove('show');
+        isIdleMode = false;
     }
 
     var goToEditMode = (e) => {
@@ -144,9 +145,7 @@ onload = function() {
 
         clearTimeout(timer);
         //after idle time start video
-
         if(isIdleMode){
-            console.log('stop video');
             navigate(':home');
             isIdleMode = false;
         }
