@@ -40,7 +40,7 @@ onload = function() {
     let videoCancelHandler = document.querySelector('#cancel-fullScreen-handler');
 
     let isIdleMode = false;
-    let idleTime = 1000000;
+    let idleTime = 10000;
 
     var timer = null;
     var urls = [];
