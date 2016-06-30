@@ -53,7 +53,7 @@
 }
 
 #v_news h2.story-heading {
-    font-size: 5.4em;
+    font-size: 4.5em !important;
     line-height: 1em;
     max-width: 900px;
     font-family: serif;
@@ -64,7 +64,7 @@
 }
 
 #v_news p.byline {
-    font-size: 0.8em;
+    font-size: 0.7em;
     font-style: italic;
 }
 

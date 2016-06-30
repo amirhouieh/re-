@@ -235,7 +235,7 @@ class Navigation{
         });
 
 
-        this.suggestionList.style.height = this.matchItems.length * 20 + "px";
+        this.suggestionList.style.height = this.matchItems.length * 30 + "px";
     }
 
 

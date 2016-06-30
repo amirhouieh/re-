@@ -17,7 +17,8 @@ const msgList = {
     DEFAULT: 'url-for-chrome',
     VIDEO: 'video',
     CONNECTION: 'connection-success',
-    HOME: 'homepage'
+    HOME: 'homepage',
+    SCROLL: "scroll"
 }
 
 // connect to chrome app
@@ -26,6 +27,8 @@ const socket = io.connect(chromeApp.ip + ":" + chromeApp.port);
 socket.on('connect',(event,msg)=>{
     console.log('re- is connected to server');
 });
+
+
 
 // get url from browser and pass to chrome app
 ipcMain.on(msgList.CONNECTION, (event, msg) =>socket.emit(msgList.CONNECTION));

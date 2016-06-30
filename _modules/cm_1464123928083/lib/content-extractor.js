@@ -28,6 +28,29 @@ module.exports = function(urlSet, html, lng) {
                 img.attribs.src = null;
             });
 
+            var tagsToRemove = ['header','.header','.footer','footer','button','iframe', 'form','input', 'nav'];
+
+
+    doc(textualPageContent).find(tagsToRemove.join(',')).remove();
+
+
+    // remove navbars
+    doc(textualPageContent).find('*').each((i,node)=>{
+
+        let nodeLinkSize = doc(node).find('a').length;
+        let nodeElemSize = doc(node).find('*').length;
+
+        let nodeLinkDensity = nodeLinkSize/nodeElemSize;
+
+
+        if(nodeLinkDensity>0.3 && nodeLinkDensity<1) {
+            doc(node).remove();
+        }
+
+    });
+
+
+
             return doc(textualPageContent);
         }
         

@@ -69,6 +69,12 @@ class View{
             this.colorTheme.push(module.profile.color);
             this.element.modulesWrapper.appendChild( module.element );
         });
+
+
+        if(this.colorTheme.length==1){
+            this.colorTheme.push('rgb(100,100,100)');
+        }
+
     }
 
     update(uri,html){
@@ -132,7 +138,6 @@ class ViewElement{
         this.wrapper.className = "view-wrapper";
         this.wrapper.setAttribute('_title', profile.title);
         this.wrapper.setAttribute('unique-css-selector', '.' + this.wrapper.className + '#'+ this.wrapper.id);
-
         this.modulesWrapper.className = 'modules-wrapper';
         this.styleSheet.type = "text/css";
         this.styleSheet.innerText = readFileSync( join(views_dir,profile.id,profile.theme) );

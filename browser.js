@@ -10,13 +10,15 @@ const msgList = {
     DEFAULT: 'url-for-chrome',
     VIDEO: 'video',
     CONNECTION: 'connection-success',
-    HOME: 'homepage'
+    HOME: 'homepage',
+    SCROLL: "scroll"
 }
 
 
 var navigate;
 var refresh;
 var currentUrl;
+var scroll;
 
 views.load();
 localHistory.init();
@@ -40,7 +42,7 @@ onload = function() {
     let videoCancelHandler = document.querySelector('#cancel-fullScreen-handler');
 
     let isIdleMode = false;
-    let idleTime = 1000000;
+    let idleTime = 30000;
 
     var timer = null;
     var urls = [];
@@ -71,6 +73,10 @@ onload = function() {
 
         nav.closePage();
         views.setEditMode();
+    };
+
+    scroll = (e)=>{
+        ipcRenderer.send(msgList.SCROLL,e.target.scrollTop)
     }
 
     refresh = () =>{
@@ -120,6 +126,13 @@ onload = function() {
                 localHistory.add(url,_html);
                 prevUrl = urls.pop();
                 urls.push(url);
+
+                let all = webview.querySelectorAll('*');
+
+                // for(let x =0; x<all.length; x++){
+                //     all[x].addEventListener('scroll',scroll);
+                // }
+
             },
             error: (err)=>{
                 console.log(err);
@@ -165,6 +178,9 @@ onload = function() {
     document.onmousemove = resetTimer;
     document.onkeypress = resetTimer;
     document.onkeyup = shortcuts;
+
+
+
 
     navigate();
     resetTimer();

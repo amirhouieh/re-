@@ -1,10 +1,10 @@
 body {
-    font-family: Helvetica;
+    /*font-family: Arial;*/
     /*font-family: 'PT Mono';*/
     /*font-family: 'Source Code Pro';*/
-    /*font-family: Georgia;*/
+    font-family: Georgia;
     line-height: 1.4em;
-    font-size: 18px;
+    font-size: 22px;
     overflow: hidden;
 }
 
@@ -35,6 +35,7 @@ nav#navigation-bar{
 
 nav#navigation-bar *{
     -webkit-user-select: none;
+    font-size: 0.9em;
 }
 
 nav#navigation-bar input#location {
@@ -328,9 +329,9 @@ span.shortcut-key {
 }
 
 .re-menu-page-content .itemTitle {
-    max-width: 500px;
+    max-width: 650px;
     margin-bottom: 0.5em;
-    font-size: 4em;
+    font-size: 3.5em;
     line-height: 1em;
     /* overflow: hidden; */
     display: -webkit-box;
@@ -351,7 +352,7 @@ span.shortcut-key {
     padding-bottom: 10%;
 }
 .re-menu-page-content li.historyItem {
-    margin-bottom: 7em;
+    margin-bottom: 5em;
 }
 
 

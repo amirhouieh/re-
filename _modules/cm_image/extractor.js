@@ -14,7 +14,7 @@ module.exports = function (uri, rawHtml) {
     let imagesWrapper = doc('<div class="formatted __images_wrapper__">');
     var whiteSpaceRegex = /\s/g;
     var maxNumberOfLevelToGoUp = 5;
-    var tagsToRemove = ['header','footer','button','iframe'];
+    var tagsToRemove = ['header','.header','.footer','footer','button','iframe', 'form','input', 'nav'];
 
 
 
