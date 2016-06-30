@@ -2,7 +2,7 @@
   "title": "Default view text&image",
   "description": "Default view for Re- for all pages",
   "author": "Amir Houieh",
-  "urls": ["http://www.bbc.com"],
+  "urls": ["http://www.bbc.com","http://www.nytimes.com","http://www.bbc.com/","http://www.nytimes.com/"],
   "active": true,
   "script": "script.js",
   "theme": "theme.css",

@@ -1,52 +1,73 @@
-#v_news #cm_news_nytimes {
-    width: 50%;
-    /* position: absolute; */
-    top: 0;
-    left: 30px;
-    font-family: geo;
-}
+/*#v_news #cm_news_nytimes {*/
+    /*width: 50%;*/
+    /*!* position: absolute; *!*/
+    /*top: 0;*/
+    /*left: 30px;*/
+    /*font-family: geo;*/
+/*}*/
 
-#v_news {width: 100%; height: 1000%; background: black;}
-#v_news *{
-    color: white !important;
-}
-#v_news .modules-wrapper {
+/*#v_news {width: 100%; height: 1000%; background: black;}*/
+/*#v_news *{*/
+    /*color: white !important;*/
+/*}*/
+/*#v_news .modules-wrapper {*/
+    /*width: 100%;*/
+    /*display: block;*/
+/*}*/
+
+/*#v_news p.byline {font-style: italic;}*/
+
+/*#v_news ul.longtext {*/
+    /*font-family: helvetica;*/
+/*}*/
+
+
+
+#v_news .collection {
     width: 100%;
-    display: block;
+    min-height: 100%;
+    margin-top: -24px;
 }
 
-#v_news p.byline {font-style: italic;}
-
-#v_news ul.longtext {
-    font-family: helvetica;
+#v_news div#cm_news_nytimes {
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    margin: 0;
+    padding: 0;
 }
 
-#v_news article#topnews-100000004495397 {
-    /* margin-bottom: 2em; */
-}
-
-#v_news .collection.longtext {
-    margin-bottom: 5em;
-}
-
-#v_news .theme-summary.lede {
-    display: none;
+#v_news .module-content-wrapper {
+    height: 100%;
+    padding: 0;
+    top: 0;
 }
 
 #v_news h2.story-heading {
-    font-size: 3em;
+    font-size: 6.4em;
     line-height: 1em;
-    /* color: black !important; */
-    margin-left: 30px;
-    margin-bottom: 1em;
+    max-width: 800px;
+    font-family: serif;
 }
 
-#v_news section#v_news {
-    background: black;
-    height: 1000%;
-    display: block;
+#v_news h2.story-heading * {
+    color: black;
 }
 
-#v_news section#v_news * {
-    color: white;
+#v_news p.byline {
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+#v_news p.longtext,li.longtext {margin-left: 30px;max-width: 600px;list-style: none;}
+
+#v_news ul {
+    width: 100vw;
+}
+
+#v_news p.theme-comments {
+    display: none;
+}
+
+#v_news article#topnews-100000004502114 {
 }
