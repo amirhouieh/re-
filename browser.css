@@ -331,7 +331,7 @@ span.shortcut-key {
 .re-menu-page-content .itemTitle {
     max-width: 650px;
     margin-bottom: 0.5em;
-    font-size: 3.5em;
+    font-size: 6.5em !important;
     line-height: 1em;
     /* overflow: hidden; */
     display: -webkit-box;

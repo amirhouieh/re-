@@ -67,12 +67,9 @@ class Navigation{
 
 
     createView(){
+
         let inputs = this.pagesWraper.querySelectorAll('.view-input-wrapper>.input');
         let selectedModules = this.pagesWraper.querySelectorAll('.moduleIcon.selected');
-
-
-
-
 
         if(!selectedModules.length){
             alert('the view can not be created without any module!');
@@ -107,7 +104,9 @@ class Navigation{
                 viewForUrls.deactivate();
         }
 
+        console.log(urls);
         // let viewData = localHistory.map(inputs,(input));
+
         // views.createView()
     }
 
@@ -145,17 +144,26 @@ class Navigation{
                 if(pageName=="history")
                     this.showHistory();
 
-                if(pageName=="newView")
-                    this.loadModules();
+                if(pageName=="newView") {
+                    this.initViewForm();
+                }
             }
 
         });
     }
 
-    loadModules(){
+    initViewForm(){
         let ModuleController = require('../browser_webview/browser_modules_controller');
         let mc = new ModuleController();
+
         let moduleGallery = this.pagesWraper.querySelector('#module-gallery');
+        let dataList = this.pagesWraper.querySelector('#urlslist');
+
+        let dataListItem = localHistory.getList().map((item)=>{
+            // dataList.innerHTML += '<option value="'+ item.url +'"/>';
+        });
+
+        // dataList.innerHTML = dataListItem.join('');
 
         moduleGallery.innerHTML = "";
 

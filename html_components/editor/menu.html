@@ -8,6 +8,7 @@
         <!--toggle boxes-->
         function toggleToolBox() {
             let id = this.getAttribute('for');
+
             this.parentNode.querySelector('.toolbox').classList.toggle('open');
 
             var all=document.querySelectorAll('.toolbox:not(#'+ id +')');

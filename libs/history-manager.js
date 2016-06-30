@@ -6,7 +6,6 @@ const _ = require('lodash');
 var dateFormat = require('dateformat');
 
 const storage = require('electron-json-storage');
-// const HistoryItem = require('./history-item');
 var itemList = [];
 
 const titleRegex = /<title[^>]*>([^<]+)<\/title>/;
@@ -70,9 +69,8 @@ class History{
 
     }
 
-
     getList(){
-        return itemList;
+        return _.cloneDeep(itemList);
     }
 
     clear(callback){
