@@ -30,6 +30,8 @@ class History{
     }
 
     init(){
+
+
         // storage.clear((err)=>console.log(err));
         storage.get('history', function(error, data) {
             if (error) throw error;
@@ -42,9 +44,13 @@ class History{
 
     add(url,_html){
 
+
+        if(!_html)
+            return;
+
         let title = _html.match(titleRegex);
 
-        if(!_html || !title)
+        if(!title)
             return;
 
         url = url.toLowerCase().trim();

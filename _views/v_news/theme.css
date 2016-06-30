@@ -26,7 +26,6 @@
 #v_news .collection {
     width: 100%;
     min-height: 100%;
-    margin-top: -24px;
 }
 
 #v_news div#cm_news_nytimes {
@@ -51,7 +50,7 @@
 }
 
 #v_news h2.story-heading * {
-    color: black;
+    color: inherit !important;
 }
 
 #v_news p.byline {
