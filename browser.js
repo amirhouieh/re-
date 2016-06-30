@@ -131,7 +131,6 @@ onload = function() {
     function shortcuts(e) {
         switch (e.keyCode){
             case 8:
-                prevUrl
                 if(e.target.id!=="location"&&prevUrl)
                     navigate(prevUrl);
                 break;
