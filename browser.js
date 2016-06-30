@@ -50,8 +50,6 @@ onload = function() {
     nav.init(views.colorList);
 
     var playVideo = function(e) {
-
-        return;
         video.load();
         video.classList.add('show');
         video.play();
@@ -150,7 +148,7 @@ onload = function() {
 
         if(isIdleMode){
             console.log('stop video');
-            // navigate(':home');
+            navigate(':home');
             isIdleMode = false;
         }
 
