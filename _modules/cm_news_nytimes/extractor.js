@@ -4,10 +4,13 @@
 
 module.exports = function (uri, rawHtml) {
 
+
     const cheerio = require('cheerio');
     const doc = cheerio.load(rawHtml);
     let collection = doc('.collection').addClass('__news-item__');
     collection.find('.subscribe-wrapper').remove();
+
+
 
     return collection;
 

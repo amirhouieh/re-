@@ -23,9 +23,13 @@
 
 
 
+#v_news *{
+    font-family: monospace !important;
+}
+
 #v_news .collection {
     width: 100%;
-    min-height: 100%;
+    min-height: calc(100% - 60px);
     margin-left: 30px;
     margin-top: 30px;
 }
@@ -49,9 +53,9 @@
 }
 
 #v_news h2.story-heading {
-    font-size: 6.4em;
+    font-size: 5.4em;
     line-height: 1em;
-    max-width: 800px;
+    max-width: 900px;
     font-family: serif;
 }
 
