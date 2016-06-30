@@ -2,23 +2,50 @@
  * Created by amir on 26/05/16.
  */
 
-module.exports.eachArr = function (arr,callback) {
-    for(let x=0; x<arr.length; x++)
-        callback(x,arr[x]);
-}
+const badTags = ["noscript","link","script","style"];
+const whiteSpaceRegex = /\s/g;
+const cheerio = require('cheerio');
 
-module.exports.eachObj = function (obj,callback) {
-    for(let x in obj)
-        callback(x,obj[x]);
-}
+class Extractor{
 
-module.exports.guid = function(){
-
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
+    constructor(html){
+        this.doc = cheerio.load(html);
+        this.removeBadTags();
     }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4();
+
+
+    removeBadTags(){
+
+        this.doc(badTags.join(',')).each((i,badTag)=>{
+            return this.doc(badTag).remove();
+        });
+
+    }
+
+    navBarSelector(){
+
+        let navBarsClassNames = [];
+
+        this.doc('body *').each((i,node)=>{
+
+            let nodeLinkSize = this.doc(node).find('a').length;
+            let nodeElemSize = this.doc(node).find('*').length;
+
+            let nodeLinkDensity = nodeLinkSize/nodeElemSize;
+
+            if(nodeLinkDensity>0.3 && nodeLinkDensity<1 && node.attribs.class)
+                navBarsClassNames.push('.'+node.attribs.class.split(' ').join('.'));
+        });
+        
+        return navBarsClassNames;
+    }
+
+    netText(node) {
+        return this.doc(node).text().replace(whiteSpaceRegex,'').trim();
+    };
+
+
 }
+
+
+module.exports.Extractor = Extractor;

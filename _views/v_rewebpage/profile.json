@@ -2,10 +2,10 @@
   "title": "Default view text&image",
   "description": "Default view for Re- for all pages",
   "author": "Amir Houieh",
-  "urls": "",
+  "urls": ["http://re-browser.github.io"],
   "active": true,
   "script": "script.js",
   "theme": "theme.css",
-  "content_modules":["cm_1464123928083","cm_image"],
-  "id": "v_default_view"
+  "content_modules":["cm_rewebpage"],
+  "id": "v_rewebpage"
 }

@@ -17,6 +17,7 @@
     "font-manager": "^0.2.2",
     "fs-extra": "^0.30.0",
     "lodash": "^4.12.0",
+    "rel-to-abs": "^0.1.0",
     "request": "^2.72.0",
     "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.7",

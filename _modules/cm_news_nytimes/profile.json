@@ -5,7 +5,7 @@
   "urls": "",
   "script": "extractor",
   "css": "",
-  "color": "rgb(204, 207, 214)",
+  "color": "rgb(104, 207, 214)",
   "icon": "icon.png",
-  "id": "cm_re_homepage"
+  "id": "cm_news_nytimes"
 }

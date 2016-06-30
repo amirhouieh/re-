@@ -7,6 +7,7 @@ function Formatter(){
     const whiteSpaceRegex = /\s/g;
     const urlTool = require('./url-utils');
     const cheerio = require('cheerio');
+    const badTags = ["noscript","link","script","style"];
 
     var uri;
     var doc;
@@ -38,15 +39,16 @@ function Formatter(){
 
         "links": function () {
 
-            if( isEmptyNode.call(this) || !this.attribs.href)
+            if( isEmptyNode.call(this) || !this.attribs.href )
                 return doc(this).remove();
 
             if(doc(this).hasClass('formatted')){
                 return doc(this);
             }
 
-            var href = urlTool.relToAbs(uri,this.attribs.href);
 
+
+            var href = urlTool.relToAbs(uri,this.attribs.href);
             // if(!href){
             //     return doc(this).html();
             // }
@@ -94,8 +96,6 @@ function Formatter(){
         doc = cheerio.load('<div class="module-content-wrapper"></div>');
         let contentDomObj = doc(content);
 
-        console.log(moduleId, contentDomObj);
-
          if(!contentDomObj.length){
              let contentWrapper = cheerio.load('<div class="module-content-wrapper">problem to load content!</div>');
              return contentWrapper('.module-content-wrapper').addClass('error');
@@ -107,20 +107,21 @@ function Formatter(){
         if(uri)
             wrapper.attr('name',uri.hostname)
 
-        if(doc(content).hasClass('formatted')){
-            var temp = content[0].attribs;
+        if(contentDomObj.hasClass('formatted')){
+            var temp = contentDomObj[0].attribs;
             content[0].attribs = {};
             for(var x in temp)
-                content[0].attribs[x] = temp[x];
+                contentDomObj[0].attribs[x] = temp[x];
         }
          else
-             content[0].attribs = {};
+            contentDomObj[0].attribs = {};
 
 
          formatImages();
          formatLinks();
          removeBadTags();
          removeBadAttr();
+         removeEmptyTags();
 
          return wrapper;
     };
@@ -145,17 +146,27 @@ function Formatter(){
         });
     }
 
-    function removeBadTags() {
-        doc('*').each(function () {
-            if( isEmptyNode.call(this) || this.name == "script" || this.name == "link" )
-                return formatActionTable.badTags.call(this);
+    function removeEmptyTags() {
+        doc('div,p,article,span,i,li,h1,h2,h3,h4,h5,h6').each((i,node)=>{
 
-            formatActionTable.isLongText.call(this);
+            if(isEmptyNode.call(node)){
+                formatActionTable.badTags.call(node);
+            }else{
+                formatActionTable.isLongText.call(node);
+            }
+
+        });
+    }
+
+    function removeBadTags() {
+        doc(badTags.join(',')).each(function () {
+            formatActionTable.badTags.call(this);
         });
     };
 
     function isEmptyNode() {
-        return getNodeNetText.call(this).length ==0;
+        let isEmpty = getNodeNetText.call(this).length == 0 && doc(this).find('img').length==0;
+        return isEmpty;
     };
 
     function getNodeNetText() {

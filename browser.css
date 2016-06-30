@@ -189,6 +189,10 @@ section.view-wrapper {
     overflow: auto
 }
 
+.modules-wrapper.hide{
+    display: none;
+}
+
 .module-content-wrapper {
     max-height: 100%;
     overflow: auto;
@@ -436,4 +440,17 @@ video#video.show{
 
 .module-content-wrapper.error{
     display: none !important;
+}
+
+.view-wrapper .unable-view{
+    width: 450px;
+    transform: translate(-50%);
+    top: 46%;
+    position: absolute;
+    left: 50%;
+    display: none;
+}
+
+.view-wrapper .unable-view.show{
+    display: block !important;
 }

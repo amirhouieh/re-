@@ -108,16 +108,15 @@ class Navigation{
         }
 
         // let viewData = localHistory.map(inputs,(input));
-        
         // views.createView()
-        
-        
-        console.log(urls);
-        console.log(inputs);
-
     }
 
     openPage(btn){
+
+        if(btn.id=="home"){
+            navigate(':home');
+            return;
+        }
 
         this.pagesWraper.classList.add('gradientAnimate');
         setTimeout(()=>
@@ -311,6 +310,8 @@ class Navigation{
 
             if(err)
                 return callbacks.error(err);
+
+            // if(response.headers["content-type"] !== "text/html")
 
             callbacks.success(response.request.uri,_html);
 

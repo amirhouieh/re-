@@ -2,10 +2,10 @@
   "title": "Default view text&image",
   "description": "Default view for Re- for all pages",
   "author": "Amir Houieh",
-  "urls": ["http://re-browser.github.io"],
+  "urls": ["http://www.bbc.com"],
   "active": true,
   "script": "script.js",
   "theme": "theme.css",
-  "content_modules":["cm_rewebpage"],
-  "id": "v_rewebpage"
+  "content_modules":["cm_news_nytimes"],
+  "id": "v_news"
 }

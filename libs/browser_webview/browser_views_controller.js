@@ -142,7 +142,7 @@ class ViewsController{
         let currentView = this.all[this.currentViewId];
         currentView.show();
         currentView.update(uri, html);
-        setTimeout(()=>currentView.execute.call(currentView),1000);
+        setTimeout(()=>currentView.execute.call(currentView),300);
     }
 
     switchView(uri, html){

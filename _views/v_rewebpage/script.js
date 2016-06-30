@@ -3,6 +3,14 @@
  */
 
 module.exports = function() {
-    console.log('excute foreground');
-    return this;
+
+    var img = new Image;
+
+    img.src = "resources/media/re-web.png"
+
+    let wrapper = document.querySelector('.module-content-wrapper[name="re-browser.github.io"]');
+
+
+        wrapper.appendChild(img);
+
 }

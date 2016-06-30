@@ -39,20 +39,23 @@ class History{
         });
     }
 
+
     add(url,_html){
 
-        if(!_html)
+        let title = _html.match(titleRegex);
+
+        if(!_html || !title)
             return;
 
         url = url.toLowerCase().trim();
 
-        let title = _html.match(titleRegex)[1];
+        title = title[1];
         let itemInHistory = itemList.filter((item)=>item.url==url);
 
         //if the url is not already in history
-        if( !itemInHistory.length )
-            itemList.push(new HistoryItem(url,title));
-
+        if( !itemInHistory.length ) {
+            itemList.push(new HistoryItem(url, title));
+        }
         //otherwise we only increase the count
         else {
             itemInHistory[0].count += 1;
@@ -60,6 +63,7 @@ class History{
         }
 
     }
+
 
     getList(){
         return itemList;

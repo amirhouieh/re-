@@ -1,3 +1,52 @@
-#v_rewebpage img{
+#v_news #cm_news_nytimes {
+    width: 50%;
+    /* position: absolute; */
+    top: 0;
+    left: 30px;
+    font-family: geo;
+}
+
+#v_news {width: 100%; height: 1000%; background: black;}
+#v_news *{
+    color: white !important;
+}
+#v_news .modules-wrapper {
     width: 100%;
+    display: block;
+}
+
+#v_news p.byline {font-style: italic;}
+
+#v_news ul.longtext {
+    font-family: helvetica;
+}
+
+#v_news article#topnews-100000004495397 {
+    /* margin-bottom: 2em; */
+}
+
+#v_news .collection.longtext {
+    margin-bottom: 5em;
+}
+
+#v_news .theme-summary.lede {
+    display: none;
+}
+
+#v_news h2.story-heading {
+    font-size: 3em;
+    line-height: 1em;
+    /* color: black !important; */
+    margin-left: 30px;
+    margin-bottom: 1em;
+}
+
+#v_news section#v_news {
+    background: black;
+    height: 1000%;
+    display: block;
+}
+
+#v_news section#v_news * {
+    color: white;
 }

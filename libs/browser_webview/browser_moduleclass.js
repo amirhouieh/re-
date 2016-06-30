@@ -20,11 +20,18 @@ class ContentModuleObj{
         this.profile = fse.readJsonSync(join(this.path,'profile.json'), {throw: false});
         this.element = newModuleWrapper(this.id);
         this.script = require(join(this.path,this.profile.script));
+        this.error = true;
         
     }
 
     update(uri, html, callback){
         this.element.innerHTML = Formatter.do(uri,this.script(uri, html),this.id);
+
+        if(this.element.querySelector('.error')){
+            this.error = true;
+        }else{
+            this.error = false;
+        }
     }
     
     getIconElement(){

@@ -43,11 +43,15 @@ onload = function() {
     let idleTime = 10000;
 
     var timer = null;
+    var urls = [];
+    var prevUrl = null;
 
     views.init(webView);
     nav.init(views.colorList);
 
     var playVideo = function(e) {
+
+        return;
         video.load();
         video.classList.add('show');
         video.play();
@@ -86,6 +90,10 @@ onload = function() {
 
         url = url||nav.locationInput.value;
 
+        if(url=="http://localhost:3000/re"){
+            ipcRenderer.send('website');
+        }
+
         if(url==":home") {
             ipcRenderer.send(msgList.HOME);
             stopVideo();
@@ -111,7 +119,8 @@ onload = function() {
                 views.update(uri,_html);
                 nav.updateBarColor(views.currentViewId);
                 localHistory.add(url,_html);
-                currentUrl = url;
+                prevUrl = urls.pop();
+                urls.push(url);
             },
             error: (err)=>{
                 console.log(err);
@@ -121,16 +130,27 @@ onload = function() {
     }
 
 
+    function shortcuts(e) {
+        switch (e.keyCode){
+            case 8:
+                prevUrl
+                if(e.target.id!=="location"&&prevUrl)
+                    navigate(prevUrl);
+                break;
+            default:
+                break;
+        }
+    }
+
 
     function resetTimer(e) {
-
 
         clearTimeout(timer);
         //after idle time start video
 
         if(isIdleMode){
             console.log('stop video');
-            navigate(':home');
+            // navigate(':home');
             isIdleMode = false;
         }
 
@@ -148,6 +168,7 @@ onload = function() {
 
     document.onmousemove = resetTimer;
     document.onkeypress = resetTimer;
+    document.onkeyup = shortcuts;
 
     navigate();
     resetTimer();

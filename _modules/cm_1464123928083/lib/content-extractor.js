@@ -22,9 +22,12 @@ module.exports = function(urlSet, html, lng) {
 
         //text-based page
         if( textualPageContent && (textRatio>=0.1 || rawText.length >=300 ) ) {
+
             doc(textualPageContent).find('img').each((i,img)=>{
-                doc(this).remove();
+                doc(img).remove();
+                img.attribs.src = null;
             });
+
             return doc(textualPageContent);
         }
         

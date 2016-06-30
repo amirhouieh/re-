@@ -5,12 +5,15 @@
 module.exports = function (uri, rawHtml) {
 
     const cheerio = require('cheerio');
-    // const doc = cheerio.load();
+    const doc = cheerio.load(rawHtml);
+    // let collection = doc('.collection');
+    // collection.find('.subscribe-wrapper').remove();
+    // return collection;
 
-    // let wrapper = doc('<div class="formatted">');
 
-    // <h1 class="formatted">Re-</h1><p id="welcomenot" class="formatted"><strong>Wellcome to Re-</strong><span>your first modular content-driven web browser</span></p>
-    
-    return '<ul id="top-visits" class="formatted"></ul>';
+    return doc('.media-list__item');
+
+
+
 
 }

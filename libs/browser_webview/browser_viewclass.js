@@ -72,9 +72,23 @@ class View{
     }
 
     update(uri,html){
+
+        let errorNumbers = 0;
+
         this.each((module)=> {
             module.update(uri,html);
+            if(module.error)
+                errorNumbers++;
         });
+
+        if(errorNumbers==this.modules.length) {
+            this.element.errorElem.classList.add('show');
+            this.element.modulesWrapper.classList.add('hide');
+        }else{
+            this.element.errorElem.classList.remove('show');
+            this.element.modulesWrapper.classList.remove('hide');
+        }
+
     }
 
     hasModule(moduleId){
@@ -108,8 +122,11 @@ class ViewElement{
         this.wrapper = document.createElement('section');
         this.styleSheet = document.createElement('style');
         this.modulesWrapper = document.createElement('div');
+        this.errorElem = document.createElement('div');
         // this.script = document.createElement('script');
 
+        this.errorElem.className = "unable-view"
+        this.errorElem.innerHTML = "<h3>Sorry, all the module in current view are unable to extract the content!</h3>"
 
         this.wrapper.id = profile.id;
         this.wrapper.className = "view-wrapper";
@@ -123,6 +140,8 @@ class ViewElement{
         // this.wrapper.appendChild(this.script);
         this.wrapper.appendChild(this.styleSheet);
         this.wrapper.appendChild(this.modulesWrapper);
+        this.wrapper.appendChild(this.errorElem);
+
     }
 
 }
