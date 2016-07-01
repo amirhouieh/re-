@@ -92,7 +92,6 @@ onload = function() {
             url = link.getAttribute('_href');
         }
 
-
         url = url||nav.locationInput.value;
 
         if(url=="http://localhost:3000/re"){
@@ -127,8 +126,7 @@ onload = function() {
                 prevUrl = urls.pop();
                 urls.push(url);
 
-                let all = webview.querySelectorAll('*');
-
+                // let all = webview.querySelectorAll('*');
                 // for(let x =0; x<all.length; x++){
                 //     all[x].addEventListener('scroll',scroll);
                 // }

@@ -8,6 +8,7 @@ const doubleQouteRegex = /"/g;
 const singleQouteRegex = /"/g;
 const greaterSignRegex = /</g;
 const smallerSignRegex = />/g;
+const isUrlRegex = /^(?:f|ht)tps?\:\/\//;
 
 function relToAbs(uri, url){
     /* Only accept commonly trusted protocols:
@@ -45,6 +46,38 @@ function relToAbs(uri, url){
 };
 
 
-module.exports = {
-    relToAbs: relToAbs
+function addhttp(url) {
+    if (!isUrlRegex.test(url)) {
+        url = "http://" + url;
+    }
+    return url;
 }
+
+function parse(url) {
+    url = url.trim() // remove whitespace common on copy-pasted url's
+
+    if (!url) {
+        return ':home'
+    }
+    // if the url starts with a (supported) protocol, do nothing
+    if (urlParser.isURL(url)) {
+        return url
+    }
+
+    if (url.indexOf('view-source:') === 0) {
+        var realURL = url.replace('view-source:', '')
+
+        return 'view-source:' + urlParser.parse(realURL)
+    }
+
+    // if the url doesn't have a space and has a ., or is a host from hosts file, assume it is a url without a protocol
+    if (urlParser.isURLMissingProtocol(url)) {
+        return 'http://' + url
+    }
+    // else, do a search
+    return currentSearchEngine.searchURL.replace('%s', encodeURIComponent(url))
+}
+
+
+module.exports.relToAbs = relToAbs;
+module.exports.addhttp = addhttp;

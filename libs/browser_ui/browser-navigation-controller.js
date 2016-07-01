@@ -1,5 +1,9 @@
 const request = require('request');
 const _ = require('lodash');
+const {addhttp} = require('../browser_webview/url-utils');
+const validUrl = require('valid-url');
+const urlParser = require('../url-parser');
+
 
 class Navigation{
 
@@ -29,6 +33,42 @@ class Navigation{
         this.attachEvents();
         this.gradientQueryForSuggestionList = this.buildGradientQuery(this.getAllColors())
     }
+
+
+    go(_url, callbacks){
+        let url = urlParser.parse(_url || this.locationInput.value);
+        const self = this;
+
+        if(url.home){
+            this.resetBarColor();
+            callbacks.success({href: url.home});
+            return;
+        }else if(url.searchQuery){
+            url = 'https://duckduckgo.com/html?q='+  url.searchQuery +'&ia=web';
+        }
+
+        this.loadStarts();
+
+        request({
+            // encoding:'binary',
+            decodeEntities: false,
+            uri:url
+        }, function(err, response, _html) {
+
+            self.loadEnds();
+            self.updateLocation(response.request.uri.href);
+
+            if(err)
+                return callbacks.error(err);
+
+            // if(response.headers["content-type"] !== "text/html")
+
+            callbacks.success(response.request.uri,_html);
+
+        });
+
+    }
+
 
 
     attachEvents(){
@@ -243,6 +283,11 @@ class Navigation{
         });
 
 
+        if(this.matchItems.length<3){
+
+        }
+
+
         this.suggestionList.style.height = this.matchItems.length * 30 + "px";
     }
 
@@ -293,39 +338,6 @@ class Navigation{
 
     }
 
-    
-    
-    go(_url, callbacks){
-        let url = _url || this.locationInput.value;
-        const self = this;
-
-        if(_url.trim() == ":home"){
-            this.resetBarColor();
-            callbacks.success({href: ":home"});
-            return;
-        }
-
-        this.loadStarts();
-
-        request({
-            // encoding:'binary',
-            decodeEntities: false,
-            uri:url
-        }, function(err, response, _html) {
-
-            self.loadEnds();
-            self.updateLocation(response.request.uri.href);
-
-            if(err)
-                return callbacks.error(err);
-
-            // if(response.headers["content-type"] !== "text/html")
-
-            callbacks.success(response.request.uri,_html);
-
-        });
-
-    }
 
     updateLocation(href){
         this.locationInput.value = href;
@@ -400,7 +412,8 @@ class Navigation{
         console.log('end loading');
         this.bar.classList.remove('gradientAnimate');
     }
-    
+
+
 }
 
 
