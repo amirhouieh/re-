@@ -177,4 +177,10 @@ div#presets-wrapper {margin-bottom: 1em;}
 }
 
 .resizer {
+    position: absolute;
+    bottom: 0;
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    right: 0;
 }

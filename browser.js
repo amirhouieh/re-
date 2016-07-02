@@ -42,7 +42,7 @@ onload = function() {
     let videoCancelHandler = document.querySelector('#cancel-fullScreen-handler');
 
     let isIdleMode = false;
-    let idleTime = 30000;
+    let idleTime = 3000000;
 
     var timer = null;
     var urls = [];
@@ -141,6 +141,11 @@ onload = function() {
 
 
     function shortcuts(e) {
+
+        if(e.target.tagName=="INPUT"){
+            return;
+        }
+
         switch (e.keyCode){
             case 8:
                 if(e.target.id!=="location"&&prevUrl)
@@ -176,9 +181,6 @@ onload = function() {
     document.onmousemove = resetTimer;
     document.onkeypress = resetTimer;
     document.onkeyup = shortcuts;
-
-
-
 
     navigate();
     resetTimer();

@@ -126,18 +126,16 @@ class Editor{
         if(!costumeStyle)
             return;
 
-
-
         this.menu.loading();
         this.view.updateTheme(costumeStyle,(err)=>{
-
-            if(err) return console.log(err);
+            if(err) return alert('saving process faild!');
 
             setTimeout(()=>{
                 this.menu.stopLoading();
             }, 1000);
 
         });
+
     }
 
     setModuleAsSelectedElement(module){

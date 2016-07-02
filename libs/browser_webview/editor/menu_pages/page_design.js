@@ -157,7 +157,6 @@ class EditorMenuDesign extends PageSuperClass{
                         this.currentModuleSelector+' ' + this.querySelector;
 
         query = '#' + this.viewId +" " + query;
-
         this.cssRules.push({selector: query, rule: cssProp});
     }
     
@@ -186,6 +185,8 @@ class EditorMenuDesign extends PageSuperClass{
         this.setSelectedElement(targetElement);
         this.updateSelectorHandlers(selectorType);
         this.updateFields();
+
+        this.cssRules = [];
     }
 
     setSelectedElement(targetElement){

@@ -44,7 +44,7 @@ class Navigation{
             callbacks.success({href: url.home});
             return;
         }else if(url.searchQuery){
-            url = 'https://duckduckgo.com/html?q='+  url.searchQuery +'&ia=web';
+            url = 'https://duckduckgo.com/html?q='+  url.searchQuery +'&ia=';
         }
 
         this.loadStarts();

@@ -12,5 +12,5 @@ module.exports = function (uri, rawHtml) {
 
     let res = doc('#links>.result.results_links_deep');
 
-    return res
+    return doc(res);
 }
