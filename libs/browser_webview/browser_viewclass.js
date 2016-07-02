@@ -50,8 +50,10 @@ class View{
         let themeFile = readFileSync(themeFilePath, 'utf8');
 
         themeFile += cssQuery;
-
-        writeFile(themeFilePath, themeFile, 'utf8',callback);
+        writeFile(themeFilePath, themeFile, 'utf8',(err)=>{
+            this.element.styleSheet.innerText = themeFile;
+            callback(err);
+        });
 
     }
 

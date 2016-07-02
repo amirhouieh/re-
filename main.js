@@ -8,7 +8,7 @@ app.on('window-all-closed', function() {
 
 
 const chromeApp = {
-    ip:'http://172.17.16.60',
+    ip:'http://172.17.16.46',
     // ip: 'http://localhost',
     port:'3000'
 };

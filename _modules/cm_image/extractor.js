@@ -14,7 +14,7 @@ module.exports = function (uri, rawHtml) {
     let imagesWrapper = doc('<div class="formatted __images_wrapper__">');
     var whiteSpaceRegex = /\s/g;
     var maxNumberOfLevelToGoUp = 5;
-    var tagsToRemove = ['header','.header','.footer','footer','button','iframe', 'form','input', 'nav'];
+    var tagsToRemove = ['header','.header','.footer','footer','button','iframe', 'form','input', 'nav','noscript'];
 
 
 
@@ -37,11 +37,11 @@ module.exports = function (uri, rawHtml) {
     images.each((i,img)=>{
         let block = findImageBlock(img);
         let blockImage = doc(block).find('img');
-
+        
         if(blockImage.length==1){
-            imagesWrapper.append(doc(block).addClass('__image-wrapper__,formatted'));
+            imagesWrapper.append(doc(block).addClass('__image-wrapper__,formatted').clone());
         }else{
-            imagesWrapper.append(img)
+            imagesWrapper.append(doc(img).clone())
         }
 
     });
@@ -50,7 +50,7 @@ module.exports = function (uri, rawHtml) {
         let block = img;
         let l = 0;
 
-        while(block.parent.name!=='body'&& getNodeNetText.call(block.parent).length <= 60 && l<=maxNumberOfLevelToGoUp){
+        while(block.parent.name!=='body'&& getNodeNetText.call(block.parent).length <= 40 && l<=maxNumberOfLevelToGoUp){
             block = block.parent;
             l++;
         }

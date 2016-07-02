@@ -120,7 +120,6 @@ class Editor{
 
     save(){
         let costumeStyle = this.menu.pages.DESIGN.getCssRules();
-
         console.log('save', costumeStyle)
 
         if(!costumeStyle)

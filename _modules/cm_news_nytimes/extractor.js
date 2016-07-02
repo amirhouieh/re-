@@ -7,12 +7,15 @@ module.exports = function (uri, rawHtml) {
 
     const cheerio = require('cheerio');
     const doc = cheerio.load(rawHtml);
-    let collection = doc('.collection').addClass('__news-item__');
-    collection.find('.subscribe-wrapper').remove();
 
+    let collections = null;
 
+    if( uri.host == "www.bbc.com"){
+        collections = doc('.media');
+    }else{
+        collections = doc('.collection').addClass('__news-item__');
+        collections.find('.subscribe-wrapper').remove();
+    }
 
-    return collection;
-
-    // return doc('.media-list__item');
+    return collections;
 }
