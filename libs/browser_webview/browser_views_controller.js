@@ -62,8 +62,8 @@ class ViewsController{
             let x = 0;
             while(!isMatch && urlPattern){
                 urlPattern = view.profile.urls[x];
-                // isMatch = uri.href.indexOf(urlPattern) !== -1;
-                isMatch = urlPattern == uri.href;
+                isMatch = uri.href.indexOf(urlPattern) !== -1;
+                // isMatch = urlPattern == uri.href;
                 x++;
             }
 
