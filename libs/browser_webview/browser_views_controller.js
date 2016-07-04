@@ -5,6 +5,7 @@
 
 var join = require('path').join;
 const walkSync = require('walk-sync');
+const URL = require('url');
 
 const app_root = process.cwd();
 const views_dir = join(app_root, "_views");
@@ -15,10 +16,8 @@ class ViewsController{
     constructor(){
         this.all = {};
         this.currentViewId = null
-        this.mainViewId = null;
         this.webView = null;
         this.colorList = {}
-        this.isEditMode = false;
         this.urls = [];
     }
 
@@ -39,10 +38,6 @@ class ViewsController{
             
             view.loadModules();
 
-            if(view.isMain)
-                this.mainViewId = view.id;
-            
-
             this.all[view.id] = view;
         }
 
@@ -52,25 +47,7 @@ class ViewsController{
 
     update(uri,html){
 
-        let expeptionalViewId = Object.keys(this.all).filter((viewId)=>{
-            let isMatch = false;
-            let view = this.all[viewId];
-
-            if(view.isMain) return false;
-
-            let urlPattern = true;
-            let x = 0;
-            while(!isMatch && urlPattern){
-                urlPattern = view.profile.urls[x];
-                isMatch = uri.href.indexOf(urlPattern) !== -1;
-                // isMatch = urlPattern == uri.href;
-                x++;
-            }
-
-            return isMatch;
-        })[0];
-
-        let nextViewId = expeptionalViewId? expeptionalViewId:this.mainViewId;
+        let nextViewId = this.getViewForUrl(uri.href).id;
 
         if(nextViewId==this.currentViewId){
             console.log('only update');
@@ -83,22 +60,31 @@ class ViewsController{
 
     }
 
-    getViewsForUrl(urls){
+    getViewForUrl(_url){
 
-        let _view = _.filter(this.all,(view)=>{
-            let has = false;
-            _.each(urls,(url)=>{
-                _.each(view.profile.urls,(_url)=>{
-                    has = _url.indexOf(url) >-1 || url.indexOf(_url) >-1;
-                })
-            })
-            return has;
-        })[0];
+        if(_url==":home")
+            return this.all['v_homepage'];
 
-        return _view? _view:this.all['v_default_view'];
+        let urlObj = URL.parse(_url);
+        let view = _.filter(this.all,(view)=>{
+            let hasMatch = false;
+            let i = 0;
+            let pattern = view.urlPatterns[i];
 
+            while(!hasMatch && pattern){
+                hasMatch = pattern.url.host == urlObj.hostname
+                            &&
+                           pattern.pathPattern.match(urlObj.path);
+
+                i++;
+                pattern = view.urlPatterns[i];
+            }
+            return hasMatch;
+        });
+
+        return view.length? view[0]:this.all['v_default_view'];
     }
-    
+
     unsetEditMode(){
         
         if(!this.editor)

@@ -2,6 +2,7 @@ const NavigationController = require('./libs/browser_ui/browser-navigation-contr
 const ViewsController = require('./libs/browser_webview/browser_views_controller');
 const HistoryManager = require('./libs/history-manager');
 const {ipcRenderer} = require('electron');
+const  UrlPattern = require('url-pattern');
 
 const views = new ViewsController();
 const localHistory = new HistoryManager();

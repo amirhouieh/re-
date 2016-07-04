@@ -3,13 +3,7 @@
  */
 
 module.exports = function (uri, rawHtml) {
-
-    const UrlParser = require('./lib/url-parser');
     const ContentExtractor = require('./lib/content-extractor');
-    
-    var urlSet = new UrlParser(uri);
-    var ce = new ContentExtractor(urlSet,rawHtml,'en');
-    
+    var ce = new ContentExtractor(rawHtml,'en');
     return ce.mainArticle();
 }
-

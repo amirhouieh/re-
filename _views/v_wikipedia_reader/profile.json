@@ -2,7 +2,7 @@
   "title": "Wiki Reader",
   "description": "A Re- default view for reading articles on wikipedia more efficient, includes modules of main article, references, quick links preview, and content table.",
   "author": "Amir Houieh",
-  "urls": ["https://en.wikipedia.org/wiki"],
+  "urls": ["https://en.wikipedia.org/wiki/*"],
   "script": "script.js",
   "active": true,
   "theme": "theme.css",

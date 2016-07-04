@@ -7,7 +7,6 @@ module.exports = function() {
 
     let list = localHistory.getTopVisits();
     let ul = document.querySelector('#top-visits');
-    var URL = require('url');
 
     if(!list.length){
         return;
@@ -18,10 +17,9 @@ module.exports = function() {
     }
 
     _.each(list,(item)=>{
-        let view = views.getViewsForUrl([item.url]);
+        let view = views.getViewForUrl(item.url);
         item.gradientQuery = buildGradientQuery(view.colorTheme);
-
-    })
+    });
 
     list.forEach((item)=>{
         let li =localHistory.itemElementForHomePage(item);

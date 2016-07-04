@@ -1,7 +1,5 @@
 const request = require('request');
 const _ = require('lodash');
-const {addhttp} = require('../browser_webview/url-utils');
-const validUrl = require('valid-url');
 const urlParser = require('../url-parser');
 
 
@@ -136,15 +134,15 @@ class Navigation{
         }
 
 
-        let viewForUrls = views.getViewsForUrl(urls);
-
-        if(viewForUrls){
-            let yes = confirm('there is already a view for this url \n' + viewForUrls.profile.id + ' \nwould you like to deactivate the existed view?');
-            if(yes)
-                viewForUrls.deactivate();
-        }
-
-        console.log(urls);
+        // let viewForUrls = views.getViewForUrl(urls);
+        //
+        // if(viewForUrls){
+        //     let yes = confirm('there is already a view for this url \n' + viewForUrls.profile.id + ' \nwould you like to deactivate the existed view?');
+        //     if(yes)
+        //         viewForUrls.deactivate();
+        // }
+        //
+        // console.log(urls);
         // let viewData = localHistory.map(inputs,(input));
 
         // views.createView()

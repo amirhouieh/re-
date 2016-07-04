@@ -2,10 +2,10 @@
   "title": "Default view text&image",
   "description": "Default view for Re- for all pages",
   "author": "Amir Houieh",
-  "urls": ["https://duckduckgo.com/html?q=*"],
-  "active": true,
+  "urls": ["http://www.youtube.com/*"],
+  "active": false,
   "script": "script.js",
   "theme": "theme.css",
-  "content_modules":["cm_default_search_engine"],
-  "id": "v_default_search_engine"
+  "content_modules":["cm_youtube"],
+  "id": "v_youtube"
 }

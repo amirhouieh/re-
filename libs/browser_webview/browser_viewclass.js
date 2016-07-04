@@ -6,6 +6,8 @@ const join = require('path').join;
 const {readFileSync,writeFile,writeFileSync} = require('fs');
 const readJsonSync = require('fs-extra').readJsonSync;
 const _ = require('lodash');
+const  UrlPattern = require('url-pattern');
+const  URL = require('url');
 
 const app_root = process.cwd();
 const views_dir = join(app_root, "_views");
@@ -23,6 +25,7 @@ class View{
         this.isMain = typeof this.profile.urls == "string" && this.profile.urls.trim().length == 0;
         this.element = new ViewElement(this.profile);
         this.colorTheme = [];
+        this.urlPatterns = [];
         this.execute = require(join(views_dir,this.profile.id,this.profile.script));
     }
 
@@ -39,6 +42,7 @@ class View{
     deactivate(){
         this.profile.active = false;
         writeFileSync(join(this.dir,'profile.json'), JSON.stringify(this.profile));
+        console.log(this.profile.id, ' is deactivated!');
     }
 
     updateTheme(costumeCss,callback){
@@ -72,6 +76,19 @@ class View{
             this.element.modulesWrapper.appendChild( module.element );
         });
 
+
+        if(typeof this.profile.urls !== 'string') {
+            _.each(this.profile.urls, (_url)=> {
+                if(_url !== ":home") {
+                    let Url = URL.parse(_url);
+                    let _pattren = new UrlPattern(Url.path);
+                    this.urlPatterns.push({
+                        pathPattern: _pattren,
+                        url: Url
+                    });
+                }
+            });
+        }
 
         if(this.colorTheme.length==1){
             this.colorTheme.push('rgb(100,100,100)');

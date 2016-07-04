@@ -4,7 +4,7 @@
 
 var whiteSpaceRegex = /\s/g;
 
-module.exports = function(urlSet, html, lng) {
+module.exports = function(html, lng) {
 
     const cheerio = require('cheerio');
     const extractor = require('unfluff');
@@ -29,50 +29,26 @@ module.exports = function(urlSet, html, lng) {
             });
 
             var tagsToRemove = ['header','.header','.footer','footer','button','iframe', 'form','input', 'nav'];
+            doc(textualPageContent).find(tagsToRemove.join(',')).remove();
 
 
-    doc(textualPageContent).find(tagsToRemove.join(',')).remove();
+            // remove navbars
+            doc(textualPageContent).find('*').each((i,node)=>{
+
+                let nodeLinkSize = doc(node).find('a').length;
+                let nodeElemSize = doc(node).find('*').length;
+
+                let nodeLinkDensity = nodeLinkSize/nodeElemSize;
 
 
-    // remove navbars
-    doc(textualPageContent).find('*').each((i,node)=>{
-
-        let nodeLinkSize = doc(node).find('a').length;
-        let nodeElemSize = doc(node).find('*').length;
-
-        let nodeLinkDensity = nodeLinkSize/nodeElemSize;
-
-
-        if(nodeLinkDensity>0.3 && nodeLinkDensity<1) {
-            doc(node).remove();
-        }
-
-    });
-
-
+                if(nodeLinkDensity>0.3 && nodeLinkDensity<1) {
+                    doc(node).remove();
+                }
+            });
 
             return doc(textualPageContent);
         }
-        
 
-        // else{
-        //     //might be image based content
-        //     var imageBasedContent = extractVisualPage();
-        //
-        //     if( imageBasedContent ) {
-        //         console.log('visual page');
-        //         return imageBasedContent;
-        //     }
-        //     else {
-        //         console.log('try for metadata');
-        //         let metadata = self.metadata();
-        //
-        //         if(metadata)
-        //             return metadata;
-        //
-        //         return 'has nothing';
-        //     }
-        // }
 
     }
 
@@ -101,82 +77,13 @@ module.exports = function(urlSet, html, lng) {
     }
 
 
-    function extractVisualPage() {
-
-        var imageParents = [];
-
-
-        // let allTextNodes = doc('body *').contents().filter((i,node)=>node.type=="tag");
-        // let imagesNumber = doc('img').length;
-        // let textLength = getNodeNetText.call(allTextNodes).length;
-        // let numberofTextNodes = allTextNodes.length;
-        // console.log(allTextNodes);
-        // console.log('number of images: ',imagesNumber,numberofTextNodes,textLength  )
-        // console.log('image/text', imagesNumber/numberofTextNodes);
-
-        doc('img').each(function(){
-            var res = findImgWrapper(this);
-
-            if(res) {
-                res.find('img').remove();
-                imageParents.push(res);
-            }
-
-        });
-
-        if(!imageParents.length)
-            return null;
-
-        return wrap(imageParents,'<ul>');
-    };
-
     function extractTextualPage() {
         var ex = extractor.lazy(html,lng);
         return ex.html();
     };
 
-    function findImgWrapper(node){
-
-        var netText = getNodeNetText.call(node);
-
-        if(netText.length>=10){
-
-            if( netText.length >= 20 && node.name !== "body"){
-                return wrap(node,'<li>');
-            }
-            else
-                return null
-        }
-
-        if(node.parent)
-            return findImgWrapper( node.parent );
-
-        return null;
-    };
-
-    function wrap(node, wrapperTag, classname) {
-        var wrapper = doc(wrapperTag);
-        classname = classname? classname+' formatted': 'formatted';
-        wrapper.attr('class',classname);
-        return wrapper.append(node);
-    };
-
     function getNodeNetText() {
         return doc(this).text().replace(whiteSpaceRegex,'').trim();
-    };
-
-    function isNavigationWrapper(node) {
-
-        if(!node) return;
-
-        let linksInNodeText = getNodeNetText.call( doc(node).find('a') );
-        let nodeText = getNodeNetText.call(node);
-
-        // if( linksInNodeText.length/nodeText.length == 1 )
-        //     return false;
-
-        return linksInNodeText.length/nodeText.length > 0.4;
-
     };
 
 }

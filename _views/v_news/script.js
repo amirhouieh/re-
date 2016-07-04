@@ -19,8 +19,5 @@ module.exports = function() {
         item.style.borderBottom = '4px solid ' + colors[i];
         i = i>=colors.length? 0:i+1;
     })
-
-
-
-
+    
 }
