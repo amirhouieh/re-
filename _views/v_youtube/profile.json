@@ -2,10 +2,10 @@
   "title": "Default view text&image",
   "description": "Default view for Re- for all pages",
   "author": "Amir Houieh",
-  "urls": ["http://www.youtube.com/*"],
-  "active": false,
+  "urls": ["https://www.youtube.com","https://www.youtube.com/*"],
+  "active": true,
   "script": "script.js",
   "theme": "theme.css",
-  "content_modules":["cm_youtube"],
+  "content_modules":["cm_imageandtext","cm_youtube_video"],
   "id": "v_youtube"
 }

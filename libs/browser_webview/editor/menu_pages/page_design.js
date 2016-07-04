@@ -67,12 +67,15 @@ class EditorMenuDesign extends PageSuperClass{
     }
 
     reset(){
+        console.log('we reset cssrules');
         this.cssRules = [];
     }
 
     getCssRules(){
         let temp = _.groupBy(this.cssRules,'selector');
         let inlineStyles = {};
+
+        console.log('this is temp', temp);
 
         _.each(temp,(rules,selector)=> {
             inlineStyles[selector] = _.map(_.groupBy(rules, 'rule.name'), (rule)=>rule.pop().rule)
@@ -157,6 +160,8 @@ class EditorMenuDesign extends PageSuperClass{
                         this.currentModuleSelector+' ' + this.querySelector;
 
         query = '#' + this.viewId +" " + query;
+
+        console.log('we updating css rules');
         this.cssRules.push({selector: query, rule: cssProp});
     }
     
@@ -186,6 +191,7 @@ class EditorMenuDesign extends PageSuperClass{
         this.updateSelectorHandlers(selectorType);
         this.updateFields();
 
+        console.log('we reset css rules');
         this.cssRules = [];
     }
 

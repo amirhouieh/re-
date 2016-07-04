@@ -51,7 +51,7 @@ module.exports = function (uri, rawHtml) {
         let blockTextLength =1;
 
 
-        while(block.parent.name!=='body'&& blockTextLength <= 10){
+        while(block.parent.name!=='body'&& blockTextLength <= 100){
             block = block.parent;
             blockTextLength = getNodeNetText.call(block).length;
             l++;

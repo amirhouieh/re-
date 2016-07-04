@@ -1,0 +1,11 @@
+{
+  "title": "Default Image and text Module",
+  "description": "A default module for Re- which extract the images wrapper with any possible caption or link related",
+  "author": "Amir Houieh",
+  "urls": "",
+  "script": "extractor",
+  "css": "",
+  "color": "rgb(100, 60, 100)",
+  "icon": "icon.png",
+  "id": "cm_imageandtext"
+}

@@ -6,13 +6,9 @@ module.exports = function (uri, rawHtml) {
 
     const cheerio = require('cheerio');
     const doc = cheerio.load(rawHtml);
-    const badTags = ["#ads",'img'];
 
 
+    console.log( doc('input.share-embed-code').val() );
 
-    console.log(uri);
-
-
-    return doc('.section-list');
-
+    return doc('input.share-embed-code');
 }

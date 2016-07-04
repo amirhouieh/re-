@@ -1,0 +1,11 @@
+{
+  "title": "Default youtube video Module",
+  "description": "A default module for Re- which extract the video from a youtube page",
+  "author": "Amir Houieh",
+  "urls": "",
+  "script": "extractor",
+  "css": "",
+  "color": "rgb(100, 60, 500)",
+  "icon": "icon.png",
+  "id": "cm_youtube_video"
+}
