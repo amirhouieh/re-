@@ -193,4 +193,4 @@ div#cm_wiki_maintext a{
 
 #v_wikipedia_reader #cm_wiki_maintext .refHandler-wrapper>a.formatted.reflink {
     display: -webkit-box;
-}#v_wikipedia_reader #cm_wiki_maintext .textnode.longtext{font-family:arial;}
+}#v_wikipedia_reader #cm_wiki_maintext .textnode.longtext{font-family:arial;}#v_wikipedia_reader #cm_wiki_maintext span{letter-spacing:12px;line-height:31px;font-weight:bold;text-decoration:underline;text-transform:uppercase;}
