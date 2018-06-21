@@ -65,7 +65,6 @@ module.exports = function() {
     let handlers = [];
     let refModule = this.getModule('cm_wiki_notes_references');
     let textModule = this.getModule('cm_wiki_maintext');
-
     let LinkPreview = require('../../libs/browser_ui/browser_hyperlink_preview');
 
     let allRefsText = refModule.element.querySelectorAll('li');

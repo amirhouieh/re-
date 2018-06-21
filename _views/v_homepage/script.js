@@ -1,7 +1,7 @@
 /**
  * Created by amir on 16/05/16.
  */
-
+var _ = require("lodash");
 
 module.exports = function() {
 
@@ -33,8 +33,4 @@ module.exports = function() {
 
         ul.appendChild(li);
     });
-
-
-
-
 }

@@ -1,5 +1,5 @@
 const {ipcMain,BrowserWindow,app} = require('electron');
-const io = require('socket.io-client');
+// const io = require('socket.io-client');
 
 app.on('window-all-closed', function() {
   app.quit();
@@ -7,34 +7,34 @@ app.on('window-all-closed', function() {
 
 
 
-const chromeApp = {
-    ip:'http://172.17.16.46',
-    // ip: 'http://localhost',
-    port:'3000'
-};
-
-const msgList = {
-    DEFAULT: 'url-for-chrome',
-    VIDEO: 'video',
-    CONNECTION: 'connection-success',
-    HOME: 'homepage',
-    SCROLL: "scroll"
-}
+// const chromeApp = {
+//     ip:'http://172.17.16.46',
+//     // ip: 'http://localhost',
+//     port:'3000'
+// };
+//
+// const msgList = {
+//     DEFAULT: 'url-for-chrome',
+//     VIDEO: 'video',
+//     CONNECTION: 'connection-success',
+//     HOME: 'homepage',
+//     SCROLL: "scroll"
+// }
 
 // connect to chrome app
-const socket = io.connect(chromeApp.ip + ":" + chromeApp.port);
+// const socket = io.connect(chromeApp.ip + ":" + chromeApp.port);
 // connect to chrome app success callback
-socket.on('connect',(event,msg)=>{
-    console.log('re- is connected to server');
-});
+// socket.on('connect',(event,msg)=>{
+//     console.log('re- is connected to server');
+// });
 
 
 
 // get url from browser and pass to chrome app
-ipcMain.on(msgList.CONNECTION, (event, msg) =>socket.emit(msgList.CONNECTION));
-ipcMain.on(msgList.DEFAULT, (event, url) => socket.emit(msgList.DEFAULT,url));
-ipcMain.on(msgList.VIDEO, (event, arg) => socket.emit(msgList.VIDEO));
-ipcMain.on(msgList.HOME, (event, arg) =>socket.emit(msgList.HOME));
+// ipcMain.on(msgList.CONNECTION, (event, msg) =>socket.emit(msgList.CONNECTION));
+// ipcMain.on(msgList.DEFAULT, (event, url) => socket.emit(msgList.DEFAULT,url));
+// ipcMain.on(msgList.VIDEO, (event, arg) => socket.emit(msgList.VIDEO));
+// ipcMain.on(msgList.HOME, (event, arg) =>socket.emit(msgList.HOME));
 
 
 app.on('ready', function() {
@@ -46,6 +46,5 @@ app.on('ready', function() {
     });
 
     mainWindow.loadURL('file://' + __dirname + '/browser.html');
-    mainWindow.openDevTools();
-
+    // mainWindow.openDevTools();
 });

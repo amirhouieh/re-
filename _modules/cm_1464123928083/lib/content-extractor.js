@@ -79,7 +79,7 @@ module.exports = function(html, lng) {
 
     function extractTextualPage() {
         var ex = extractor.lazy(html,lng);
-        return ex.html();
+        return ex;
     };
 
     function getNodeNetText() {

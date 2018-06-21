@@ -12,8 +12,7 @@ module.exports = function (uri, rawHtml) {
     let tagsToFilterQuery = tagsToFilter.join(',');
     let headLinesToFilter = ['references','external links','see also','accounting terms','notes','notes and references', 'further reading','subtopics','bibliography'];
 
-    let mainContent = doc('#mw-content-text').find(excludeBadTagsQuery);
-
+    let mainContent = doc('.mw-parser-output').find(excludeBadTagsQuery);
     // let seeAlsoTitle = mainContent.find('#See_also').parent();
     // let seeAlsoContent = seeAlsoTitle.next();
 
@@ -35,7 +34,6 @@ module.exports = function (uri, rawHtml) {
 
     while(elem){
         elem = mainContent[elemCount];
-
         if(elem&&elem.name=="h2"){
             chapter = null;
             chapter = newChapter();

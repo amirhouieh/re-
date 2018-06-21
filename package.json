@@ -21,7 +21,7 @@
     "request": "^2.72.0",
     "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.7",
-    "unfluff": "^1.0.0",
+    "unfluff": "^3.0.1",
     "unique-selector": "^0.1.1",
     "url": "^0.11.0",
     "url-pattern": "^1.0.1",

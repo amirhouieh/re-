@@ -25,6 +25,17 @@ A modular content-driven web browser.
 [Wikipedia article](https://en.wikipedia.org/wiki/Web_2.0) | default view #1: text module
 
 
+(resources/media/screenshots/1.png)
+(resources/media/screenshots/2.png)
+(resources/media/screenshots/3.png)
+(resources/media/screenshots/4.png)
+(resources/media/screenshots/5.png)
+(resources/media/screenshots/6.png)
+(resources/media/screenshots/7.png)
+
+
+
+
 #Keywords
 content-driven web browser, web browser, open source project, electron app, node js, modular web browser, customisable content, customisable browser
 

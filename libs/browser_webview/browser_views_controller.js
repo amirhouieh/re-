@@ -6,6 +6,7 @@
 var join = require('path').join;
 const walkSync = require('walk-sync');
 const URL = require('url');
+const _ = require("lodash");
 
 const app_root = process.cwd();
 const views_dir = join(app_root, "_views");
