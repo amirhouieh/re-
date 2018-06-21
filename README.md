@@ -24,14 +24,13 @@ A modular content-driven web browser.
 ![Re- A modular content-driven web browser.](resources/media/screen_shot_wikipedia.png?raw=true "Wikipedia article | default view #1: text module")
 [Wikipedia article](https://en.wikipedia.org/wiki/Web_2.0) | default view #1: text module
 
-
-(resources/media/screenshots/1.png)
-(resources/media/screenshots/2.png)
-(resources/media/screenshots/3.png)
-(resources/media/screenshots/4.png)
-(resources/media/screenshots/5.png)
-(resources/media/screenshots/6.png)
-(resources/media/screenshots/7.png)
+![](/resources/screenshots/1.png)
+![](/resources/screenshots/2.png)
+![](/resources/screenshots/3.png)
+![](/resources/screenshots/4.png)
+![](/resources/screenshots/5.png)
+![](/resources/screenshots/6.png)
+![](/resources/screenshots/7.png)
 
 
 
